@@ -16,9 +16,9 @@ Este es un proyecto backend desarrollado con **Node.js** que permite gestionar *
 
 - Node.js
 - Express.js
-- MongoDB / Mongoose (o la base de datos que estés usando)
-- JWT (para autenticación)
-- dotenv (variables de entorno)
+- MongoDB 
+- JWT 
+- dotenv 
 
 ---
 
