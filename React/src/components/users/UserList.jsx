@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const UserList = () => {
@@ -12,11 +12,9 @@ const UserList = () => {
   }, []);
 
   return (
-    <div className="user-container bg-amber-300 flex flex-nowrap overflow-x-auto gap-4 p-4">
-  {users.map(user => (
+    <div className="user-container bg-amber-300 flex flex-nowrap overflow-x-auto gap-4 p-4">{users.map(user => (
     <div 
-      key={user._id} 
-      className="user-card flex-shrink-0 w-[300px] border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
+      key={user._id} className="user-card flex-shrink-0 w-[300px] border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
     >
       
       <h3 className="text-lg font-semibold mb-2">{user.firstName} {user.lastName}</h3>
