@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/users')
+    fetch(`${DynamicUrl}/users`)
       .then(response => response.json())
       .then(data => setUsers(data))
       .catch(error => console.error('Error al cargar usuarios:', error));

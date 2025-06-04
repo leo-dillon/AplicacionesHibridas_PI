@@ -1,4 +1,5 @@
 import  {  useState } from 'react';
+const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
 const UserPostForm = () => {
   const [users, setUsers] = useState({
@@ -18,7 +19,7 @@ const UserPostForm = () => {
    const handleSubmit = (e) => {
     e.preventDefault();
     console.log(users); 
-fetch('http://localhost:5000/users', {
+fetch(`${DynamicUrl}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
