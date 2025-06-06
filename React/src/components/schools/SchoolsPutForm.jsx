@@ -1,9 +1,10 @@
 import  { useState  } from 'react';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
-const SchoolPostForm = ()=>{
+const SchoolEditForm = ()=>{
   const [useLoading, setUseLoading] = useState(false)
  const [schools, setschools] = useState({
+        id: '681953052a4809e24066ff47',
        user_id:'',
        name:'',
        CUE:'' ,
@@ -17,13 +18,13 @@ const SchoolPostForm = ()=>{
        type: ''
     })
    const handleSubmit = async (e) => {
-  e.preventDefault();
-  console.log(schools);
-  setUseLoading(true)
+    e.preventDefault();
+    console.log(schools);
+    setUseLoading(true)
 
   try {
-    const response = await fetch(`${DynamicUrl}/school`, {
-      method: 'POST',
+    const response = await fetch(`${DynamicUrl}/school/${schools.id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -52,6 +53,16 @@ const SchoolPostForm = ()=>{
     <h2 className="text-2xl font-bold text-center">Formulario de Escuela</h2>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input
+            name="id"
+            type="text"
+            placeholder="ID de Escuela"
+            value={schools.id}
+            onChange={handleChange}
+            className="input"
+            required
+            readOnly
+      />
       <input
         name="user_id"
         type="text"
@@ -172,4 +183,4 @@ const SchoolPostForm = ()=>{
  )
 }
 
-export default SchoolPostForm;
+export default SchoolEditForm;

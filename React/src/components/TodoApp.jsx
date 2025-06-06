@@ -5,6 +5,8 @@ import SchoolsList from './schools/SchoolList';
 import SchoolPostForm from './schools/SchoolPostForm';                             
 import UserPostForm from './users/UserPostForm';
 import '../index.css';
+import UserPostFormEdit from './users/UserPostFormEdit';
+import SchoolEditForm from './schools/SchoolsPutForm';
 
 const TodoApp = () => {        
   
@@ -18,6 +20,10 @@ const TodoApp = () => {
       <UserPostForm />
     </div>
     <div>
+      <h1>Formulario de editar Usuario</h1>
+      <UserPostFormEdit />
+    </div>
+    <div>
       <h1>Lista de Usuarios</h1>
       <UserList />
     </div>
@@ -25,6 +31,10 @@ const TodoApp = () => {
     <div>
       <h1>Formulario de nueva Escuelas</h1>
       <SchoolPostForm />
+    </div>
+    <div>
+      <h1>Formulario de editar Escuelas</h1>
+      <SchoolEditForm />
     </div>
     <div>
       <h1>Lista de Escuelas</h1>
