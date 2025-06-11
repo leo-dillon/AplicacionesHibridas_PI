@@ -11,7 +11,9 @@ const SchoolList = ()=>{
     }, [])
 
     return(
-        <div className="user-container bg-cyan-900 flex flex-nowrap overflow-x-auto gap-4 p-4">
+<div>
+<h1>Lista de Escuelas</h1>
+<div className="user-container bg-cyan-900 flex flex-nowrap overflow-x-auto gap-4 p-4">
   {schools.map((school) => (
     <div key={school._id} className="bg-white rounded-2xl shadow-md p-6 user-card flex-shrink-0 w-[300px] border text-center">
       <h2 className="text-xl font-bold text-gray-800 mb-2">{school.name}</h2>
@@ -37,6 +39,8 @@ const SchoolList = ()=>{
     </div>
   ))}
 </div>
+</div>
+        
 
     )
 }

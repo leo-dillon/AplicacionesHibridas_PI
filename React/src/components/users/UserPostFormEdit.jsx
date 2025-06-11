@@ -41,7 +41,8 @@ const handleChange = (e) => {
 
   return (
     <div className="user-container bg-gray-100 py-4">
-      
+            <h1>Formulario de editar Usuario</h1>
+
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4" t>
       <h2 className="text-2xl font-bold text-center">Formulario de editar Usuario</h2>
 

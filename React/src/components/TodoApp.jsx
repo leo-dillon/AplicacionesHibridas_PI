@@ -1,51 +1,59 @@
+
 import Footer from './Footer';
 import UserList from './users/UserList';
-
+import UserPostForm from './users/UserPostForm';
+import UserPostFormEdit from './users/UserPostFormEdit';
 import SchoolsList from './schools/SchoolList';
 import SchoolPostForm from './schools/SchoolPostForm';                             
-import UserPostForm from './users/UserPostForm';
+import SchoolEditForm from './schools/SchoolsPutForm';                             
+import NotFound from '../pages/NotFound';
 import '../index.css';
-import UserPostFormEdit from './users/UserPostFormEdit';
-import SchoolEditForm from './schools/SchoolsPutForm';
+import {BrowserRouter, Link, Route, Routes} from 'react-router-dom'
+
+import Home from '../pages/Home';
 
 const TodoApp = () => {        
   
-
   return (
-    <div className="d-flex flex-column min-vh-100">
-      <main className="container my-4"> 
-        {/*Users*/}
-    <div>
-      <h1>Formulario de nuevo Usuario</h1>
-      <UserPostForm />
-    </div>
-    <div>
-      <h1>Formulario de editar Usuario</h1>
-      <UserPostFormEdit />
-    </div>
-    <div>
-      <h1>Lista de Usuarios</h1>
-      <UserList />
-    </div>
-    {/* Schools*/}
-    <div>
-      <h1>Formulario de nueva Escuelas</h1>
-      <SchoolPostForm />
-    </div>
-    <div>
-      <h1>Formulario de editar Escuelas</h1>
-      <SchoolEditForm />
-    </div>
-    <div>
-      <h1>Lista de Escuelas</h1>
-      <SchoolsList/>
-    </div>
+    <>
+    <h3>Rutas</h3>
+     <nav className="bg-gray-800 p-4">
+  <ul className="flex space-x-6 justify-center">
+    <li>
+      <Link to="/" className="text-white transition duration-300"
+      >
+        Home
+      </Link>
+    </li>
+    <li>
+      <Link to="/Lista_Usuarios" className="text-white transition duration-300"
+      >
+        Usuarios Registrados
+      </Link>
+    </li>
+    <li>
+      <Link to="/Lista_Escuela" className="text-white transition duration-300"
+      >
+        Escuelas Registradas
+      </Link>
+    </li>
+  </ul>
+</nav>
 
-      </main>
-       <Footer/>
-    </div>
-    
+    <Routes>
+        <Route path='/' element={<Home/>} />
+        // {/*Users*/}
+        <Route path='/Crear_Usuario' element={<UserPostForm />} />
+        <Route path='/Editar_Usuario/:id' element={<UserPostFormEdit />} />
+        <Route path='/Lista_Usuarios' element={<UserList />} />
+        // {/*Schools*/}
+        <Route path='/Crear_Escuela' element={<SchoolPostForm />} />
+        <Route path='/Editar_Escuela' element={<SchoolEditForm />} />
+        <Route path='/Lista_Escuela' element={<SchoolsList />} />
+        <Route path='*' element={<NotFound />}/>
 
+    </Routes>
+    </>
   );
 };
 

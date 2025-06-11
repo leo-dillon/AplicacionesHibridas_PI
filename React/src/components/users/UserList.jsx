@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
+import { Link } from "react-router-dom"
 
 
 const UserList = () => {
@@ -13,7 +14,11 @@ const UserList = () => {
   }, []);
 
   return (
-    <div className="user-container bg-amber-300 flex flex-nowrap overflow-x-auto gap-4 p-4">{users.map(user => (
+    <div>
+      <h1>Lista de Usuarios</h1>
+      <div className="user-container bg-amber-300 flex flex-nowrap overflow-x-auto gap-4 p-4">
+    {users.map(user => (
+    
     <div 
       key={user._id} className="user-card flex-shrink-0 w-[300px] border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
     >
@@ -27,9 +32,14 @@ const UserList = () => {
       <p><span className="font-semibold">Dirección:</span> {user.address}</p>
       <p><span className="font-semibold">Teléfono:</span> {user.phone}</p>
       <p><span className="font-semibold">Rol:</span> <strong>{user.role}</strong></p>
+      <Link to="/Editar_Usuario" className="text-blue-400 underline text-lg transition duration-300">
+       Editar
+      </Link>
     </div>
   ))}
 </div>
+    </div>
+    
 
   );
 };
