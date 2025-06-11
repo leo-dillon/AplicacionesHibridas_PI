@@ -1,9 +1,13 @@
-import  {  useState } from 'react';
+import  {  useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
 const UserPostFormEdit = () => {
+
+  const {id}= useParams();
+
   const [users, setUsers] = useState({
-    id: '68408403742575cc24b3fab9',
+    
     firstName:'',
     lastName:'',
     gender: '',
@@ -16,11 +20,28 @@ const UserPostFormEdit = () => {
     active: true,
     role: '',
   });
-
+// Cargar los datos actuales
+  useEffect(() => {
+    const fetchSchoolData = async () => {
+      try {
+        const response = await fetch(`${DynamicUrl}/users/${id}`);
+        if (!response.ok) throw new Error('No se pudo obtener el usuario');
+        const data = await response.json();
+         setUsers(prev => ({
+        ...prev,
+        ...data,
+        birthDate: data.birthDate ? data.birthDate.split('T')[0] : ''
+      }));
+      } catch (error) {
+        console.error('Error al cargar los datos de el usuario:', error);
+      }
+    };
+    fetchSchoolData();
+  }, [id]);
    const handleSubmit = (e) => {
     e.preventDefault();
     console.log(users); 
-fetch(`${DynamicUrl}/users/${users.id}`, {
+fetch(`${DynamicUrl}/users/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -47,7 +68,6 @@ const handleChange = (e) => {
       <h2 className="text-2xl font-bold text-center">Formulario de editar Usuario</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-        <input name='id' type='text' value={users.id} onChange={handleChange} required /> 
 
         <input name="firstName" type="text" placeholder="Nombre" value={users.firstName} onChange={handleChange} className="input" required />
         <input name="lastName" type="text" placeholder="Apellido" value={users.lastName} onChange={handleChange} className="input" required />

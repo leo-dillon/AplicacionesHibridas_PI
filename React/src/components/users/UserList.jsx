@@ -32,7 +32,7 @@ const UserList = () => {
       <p><span className="font-semibold">Dirección:</span> {user.address}</p>
       <p><span className="font-semibold">Teléfono:</span> {user.phone}</p>
       <p><span className="font-semibold">Rol:</span> <strong>{user.role}</strong></p>
-      <Link to="/Editar_Usuario" className="text-blue-400 underline text-lg transition duration-300">
+      <Link to={`/Editar_Usuario/${user._id}`} className="text-blue-400 underline text-lg transition duration-300">
        Editar
       </Link>
     </div>

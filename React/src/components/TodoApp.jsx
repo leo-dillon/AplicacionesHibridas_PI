@@ -16,7 +16,6 @@ const TodoApp = () => {
   
   return (
     <>
-    <h3>Rutas</h3>
      <nav className="bg-gray-800 p-4">
   <ul className="flex space-x-6 justify-center">
     <li>
@@ -48,7 +47,7 @@ const TodoApp = () => {
         <Route path='/Lista_Usuarios' element={<UserList />} />
         // {/*Schools*/}
         <Route path='/Crear_Escuela' element={<SchoolPostForm />} />
-        <Route path='/Editar_Escuela' element={<SchoolEditForm />} />
+        <Route path='/Editar_Escuela/:id' element={<SchoolEditForm />} />
         <Route path='/Lista_Escuela' element={<SchoolsList />} />
         <Route path='*' element={<NotFound />}/>
 

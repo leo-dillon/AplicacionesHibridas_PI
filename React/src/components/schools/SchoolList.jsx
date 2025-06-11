@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
+import { Link } from "react-router-dom"
+
 const SchoolList = ()=>{
     const [schools, setSchool]= useState([])
    // se ejecuta después de que el componente se ha montado
@@ -36,6 +38,9 @@ const SchoolList = ()=>{
       <p className="text-sm text-gray-600">
         <strong>Tipo:</strong> {school.type}
       </p>
+      <Link to={`/Editar_Escuela/${school._id}`} className="text-blue-400 underline text-lg transition duration-300">
+       Editar
+      </Link>
     </div>
   ))}
 </div>

@@ -1,10 +1,12 @@
-import  { useState  } from 'react';
+import  { useState ,  useEffect  } from 'react';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
+import { useParams } from 'react-router-dom';
 
 const SchoolEditForm = ()=>{
+  const {id}= useParams();
   const [useLoading, setUseLoading] = useState(false)
  const [schools, setschools] = useState({
-        id: '681953052a4809e24066ff47',
+
        user_id:'',
        name:'',
        CUE:'' ,
@@ -17,13 +19,27 @@ const SchoolEditForm = ()=>{
        level:'',
        type: ''
     })
+     // Cargar los datos actuales
+  useEffect(() => {
+    const fetchSchoolData = async () => {
+      try {
+        const response = await fetch(`${DynamicUrl}/school/${id}`);
+        if (!response.ok) throw new Error('No se pudo obtener la escuela');
+        const data = await response.json();
+        setschools(data); // llena el formulario con los datos actuales
+      } catch (error) {
+        console.error('Error al cargar los datos de la escuela:', error);
+      }
+    };
+    fetchSchoolData();
+  }, [id]);
    const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(schools);
     setUseLoading(true)
 
   try {
-    const response = await fetch(`${DynamicUrl}/school/${schools.id}`, {
+    const response = await fetch(`${DynamicUrl}/school/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -54,16 +70,7 @@ const SchoolEditForm = ()=>{
     <h2 className="text-2xl font-bold text-center">Formulario de Escuela</h2>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input
-            name="id"
-            type="text"
-            placeholder="ID de Escuela"
-            value={schools.id}
-            onChange={handleChange}
-            className="input"
-            required
-            readOnly
-      />
+        
       <input
         name="user_id"
         type="text"
