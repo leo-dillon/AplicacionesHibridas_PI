@@ -67,7 +67,7 @@ const SchoolEditForm = ()=>{
     <div className="school-container bg-gray-100 py-4">
       <h1>Formulario de editar Escuelas</h1>
   <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4">
-    <h2 className="text-2xl font-bold text-center">Formulario de Escuela</h2>
+    <h2 className="text-2xl font-bold text-center">Editar datos de: <strong>{schools.name}</strong> </h2>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         
