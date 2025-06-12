@@ -1,9 +1,11 @@
 import  { useState ,  useEffect  } from 'react';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 
 const SchoolEditForm = ()=>{
   const {id}= useParams();
+  const navigate = useNavigate();
+
   const [useLoading, setUseLoading] = useState(false)
  const [schools, setschools] = useState({
 
@@ -46,9 +48,15 @@ const SchoolEditForm = ()=>{
       },
       body: JSON.stringify(schools),
     });
+    try {
+      navigate('/Lista_Escuela');
+    } catch (error) {
+            console.error('Error al enviar los datos:', error);
+
+    }
     setUseLoading(false)
     if (!response.ok) {
-      const errorText = await response.text();// Intentar leer el cuerpo
+      const errorText = await response.text(); 
       alert(errorText)
     }
   } catch (error) {

@@ -1,10 +1,11 @@
 import  {  useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
 const UserPostFormEdit = () => {
 
   const {id}= useParams();
+  const navigate = useNavigate();
 
   const [users, setUsers] = useState({
     
@@ -32,9 +33,11 @@ const UserPostFormEdit = () => {
         ...data,
         birthDate: data.birthDate ? data.birthDate.split('T')[0] : ''
       }));
+       
       } catch (error) {
         console.error('Error al cargar los datos de el usuario:', error);
       }
+      
     };
     fetchSchoolData();
   }, [id]);
@@ -48,7 +51,12 @@ fetch(`${DynamicUrl}/users/${id}`, {
     },
     body: JSON.stringify(users), 
   })
-    
+    .then(() => {
+      navigate('/Lista_Usuarios'); 
+    })
+    .catch((error) => {
+      console.error('Error al enviar los datos:', error);
+    });
   }
 const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
