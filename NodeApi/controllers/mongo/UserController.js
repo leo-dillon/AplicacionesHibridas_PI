@@ -13,36 +13,32 @@ export class UserController {
     static randomID(){
         return crypto.randomUUID();
     }
+	static async auth(req, res) {
+  const { email, password } = req.body;
 
-	static async auth (req, res){
-		const { email, password } = req.body
-		const user = await UserModel.findOne({ 
-			email: email 
-		})
-		if( !user ){
-			res.status(404).json({
-				message: "El usuario no existe"
-			})
-		}
-		const passOk = await bcrypt.compare(password, user.password)
-		if( !passOk ){
-			res.status(404).json({
-				message: "La contrasña es invalida"
-			})
-		}
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    return res.status(404).json({
+      message: "El usuario no existe"
+    });
+  }
+  const passOk = await bcrypt.compare(password, user.password);
+  if (!passOk) {
+    return res.status(401).json({
+      message: "La contraseña es inválida"
+    });
+  }
+  const data = {
+    id: user._id,
+    email: user.email
+  };
+  const token = jsonWebToken.sign(data, SECRET_KEY, { expiresIn: '1h' });
+  return res.json({
+    message: "Credenciales correctas",
+    jwt: token
+  });
+}
 
-		const data = {
-			id: user._id,
-			email: user.email
-		}
-
-		const token = jsonWebToken.sign( data, SECRET_KEY, { expiresIn: '1h' } )
-
-		res.json({
-			message: "Credenciales correctas",
-			jwt: token
-		})
-	}
 
 	static async getUsers(req, res) {
 		try {
@@ -109,11 +105,9 @@ export class UserController {
 	static async createUser(req, res) {
 		try {
 			const user = req.body
-			if( !user.firstName || !user.password  ){
-				res.status(403).json({
-					message: "Debe completar todos los parametros"
-				})
-			}
+			if (!user.firstName || !user.password) {
+               return res.status(403).json({ message: "Debe completar todos los parametros" });
+}
 			const passwordHash = await bcrypt.hash(user.password, salt)
 			user.password = passwordHash 
 			const newUser = new UserModel(user)
@@ -128,14 +122,30 @@ export class UserController {
 	}
 
 	static async editUserById(req, res) {
-		try {
-		const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
-		if (!user) return res.status(404).json({ error: 'No encontrado' })
-		res.status(200).json(user)
-		} catch (error) {
-		res.status(400).json({ error: error.message })
-		}
-	}
+  try {
+    const updates = { ...req.body };
+
+    // Si se incluye una nueva contraseña, hashearla
+	
+    if (updates.password) {
+  if (updates.password.trim() !== '') {
+    updates.password = await bcrypt.hash(updates.password, salt);
+  } else {
+    delete updates.password; // No se actualiza si está vacío
+  }
+}
+    const user = await UserModel.findByIdAndUpdate(req.params.id, updates, {
+      new: true,
+    });
+    res.status(200).json({
+      message: "Usuario actualizado correctamente",
+      data: user,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 
 	static async deleteUserById(req, res) {
 		try {

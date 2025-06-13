@@ -1,14 +1,16 @@
 
 import Footer from './Footer';
-import UserList from './users/UserList';
-import UserPostForm from './users/UserPostForm';
-import UserPostFormEdit from './users/UserPostFormEdit';
-import SchoolsList from './schools/SchoolList';
-import SchoolPostForm from './schools/SchoolPostForm';                             
-import SchoolEditForm from './schools/SchoolsPutForm';                             
+import UserList from '../pages/users/UserList';
+import UserPostForm from '../pages/users/UserPostForm';
+import UserPostFormEdit from '../pages/users/UserPostFormEdit';
+import SchoolsList from '../pages/schools/SchoolList';
+import SchoolPostForm from '../pages/schools/SchoolPostForm';                             
+import SchoolEditForm from '../pages/schools/SchoolsPutForm';                             
 import NotFound from '../pages/NotFound';
+import Userlogin from '../pages/users/Userlogin';
+import {Link, Route, Routes} from 'react-router-dom'
+import { AuthProvider } from '../contexts/AuthContext';
 import '../index.css';
-import {BrowserRouter, Link, Route, Routes} from 'react-router-dom'
 
 import Home from '../pages/Home';
 
@@ -25,6 +27,12 @@ const TodoApp = () => {
       </Link>
     </li>
     <li>
+      <Link to="/Iniciar_Sesion" className="text-white transition duration-300"
+      >
+        Iniciar Sesion
+      </Link>
+    </li>
+    <li>
       <Link to="/Lista_Usuarios" className="text-white transition duration-300"
       >
         Usuarios Registrados
@@ -38,11 +46,12 @@ const TodoApp = () => {
     </li>
   </ul>
 </nav>
-
-    <Routes>
+<AuthProvider>
+   <Routes>
         <Route path='/' element={<Home/>} />
         // {/*Users*/}
         <Route path='/Crear_Usuario' element={<UserPostForm />} />
+        <Route path='/Iniciar_Sesion' element={<Userlogin/>} />
         <Route path='/Editar_Usuario/:id' element={<UserPostFormEdit />} />
         <Route path='/Lista_Usuarios' element={<UserList />} />
         // {/*Schools*/}
@@ -50,8 +59,9 @@ const TodoApp = () => {
         <Route path='/Editar_Escuela/:id' element={<SchoolEditForm />} />
         <Route path='/Lista_Escuela' element={<SchoolsList />} />
         <Route path='*' element={<NotFound />}/>
-
-    </Routes>
+   </Routes>
+</AuthProvider>
+    
     </>
   );
 };
