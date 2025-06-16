@@ -82,6 +82,7 @@ const TodoApp = () => {
         <Route path='/Lista_Escuela' element={<SchoolsList />} />
         <Route path='*' element={<NotFound />}/>
       </Routes>
+      <Footer/>
     </AuthProvider>
   );
 };
