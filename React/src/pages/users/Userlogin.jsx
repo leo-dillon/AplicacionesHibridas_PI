@@ -50,8 +50,8 @@ if (!response.ok) {
 
       const result = await response.json();
       console.log(result);
-       login(result.user, result.token);
-
+      login({ email: users.email }, result.jwt);
+      
        navigate('/');
     } catch (error) {
 alert('Tenemos un error al loguear al usuario: ' + error.message);

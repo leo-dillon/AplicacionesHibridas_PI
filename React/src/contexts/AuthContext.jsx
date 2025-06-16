@@ -1,20 +1,38 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect  } from 'react';
 
 const AuthContext = createContext();
 function AuthProvider({children}) {
-     const [user, serUser] = useState(null);
-     const [token, serToken] = useState(null);
+     const [user, setUser] = useState(null);
+     const [token, setToken] = useState(null);
 
-    const login = (userData, userToken) => {
-         serUser(userData);
-         serToken(userToken);
-         localStorage.setItem('user', JSON.stringify(userData));
-         localStorage.setItem('token', userToken);
-         
+     useEffect(() => {
+  try {
+    const storedUser = localStorage.getItem('user');
+    const storedToken = localStorage.getItem('token');
+
+    if (storedUser && storedToken && storedUser !== "undefined") {
+      setUser(JSON.parse(storedUser));
+      setToken(storedToken);
     }
+  } catch (error) {
+    console.error("Error al recuperar datos de autenticación:", error);
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+}, []);
+    
+    const login = (userData, userToken) => {
+     
+     if (!userData || !userToken) return;
+      setUser(userData);
+      setToken(userToken);
+        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('token', userToken);
+};
+
     const logout = ()=>{
-      serUser(null);
-      serToken(null);
+      setUser(null);
+      setToken(null);
       localStorage.removeItem('user');
       localStorage.removeItem('token');
     }
