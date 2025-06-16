@@ -42,7 +42,7 @@ const NavBar = () => {
             <li>
               <button
                 onClick={handleLogout}
-                className="text-white hover:text-red-500 transition duration-300"
+                className="text-white transition duration-300"
               >
                 Cerrar Sesion
               </button>
