@@ -14,30 +14,31 @@ export class UserController {
         return crypto.randomUUID();
     }
 	static async auth(req, res) {
-  const { email, password } = req.body;
+		const { email, password } = req.body;
 
-  const user = await UserModel.findOne({ email });
-  if (!user) {
-    return res.status(404).json({
-      message: "El usuario no existe"
-    });
-  }
-  const passOk = await bcrypt.compare(password, user.password);
-  if (!passOk) {
-    return res.status(401).json({
-      message: "La contraseña es inválida"
-    });
-  }
-  const data = {
-    id: user._id,
-    email: user.email
-  };
-  const token = jsonWebToken.sign(data, SECRET_KEY, { expiresIn: '1h' });
-  return res.json({
-    message: "Credenciales correctas",
-    jwt: token
-  });
-}
+		const user = await UserModel.findOne({ email });
+		if (!user) {
+			return res.status(404).json({
+			message: "El usuario no existe"
+			});
+		}
+		const passOk = await bcrypt.compare(password, user.password);
+		if (!passOk) {
+			return res.status(401).json({
+			message: "La contraseña es inválida"
+			});
+		}
+		const data = {
+			id: 	user._id,
+			email: 	user.email,
+			role: 	user.role
+		};
+		const token = jsonWebToken.sign(data, SECRET_KEY, { expiresIn: '1h' });
+		return res.json({
+			message: "Credenciales correctas",
+			jwt: token
+		});
+	}
 
 
 	static async getUsers(req, res) {

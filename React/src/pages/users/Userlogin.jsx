@@ -42,19 +42,18 @@ const Userlogin = () => {
         body: JSON.stringify(users),
       });
 
-if (!response.ok) {
-  const errorData = await response.json();
-  throw new Error(errorData.message || 'Error al autenticar');
-}
-
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error al autenticar');
+      }
 
       const result = await response.json();
       console.log(result);
-      login({ email: users.email }, result.jwt);
-      
-       navigate('/');
+      login(result.jwt);
+
+      navigate('/');
     } catch (error) {
-alert('Tenemos un error al loguear al usuario: ' + error.message);
+      alert('Tenemos un error al loguear al usuario: ' + error.message);
     }
   };
 
