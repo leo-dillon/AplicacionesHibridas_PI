@@ -20,7 +20,9 @@ const UserPostFormEdit = () => {
     password:'',
     active: true,
     role: '',
+    school_id: '',
   });
+  const [schools, setSchools] = useState([]);
 // Cargar los datos actuales
   useEffect(() => {
     const fetchSchoolData = async () => {
@@ -31,7 +33,8 @@ const UserPostFormEdit = () => {
          setUsers(prev => ({
         ...prev,
         ...data,
-        birthDate: data.birthDate ? data.birthDate.split('T')[0] : ''
+        birthDate: data.birthDate ? data.birthDate.split('T')[0] : '',
+        school_id: data.school_id || '',
       }));
        
       } catch (error) {
@@ -41,6 +44,13 @@ const UserPostFormEdit = () => {
     };
     fetchSchoolData();
   }, [id]);
+  useEffect(() => {
+  fetch(`${DynamicUrl}/school`)
+    .then(response => response.json())
+    .then(data => setSchools(data))  // guardás directo el arreglo de escuelas
+    .catch(error => console.error('Error al cargar escuelas:', error));
+}, []);
+
    const handleSubmit = (e) => {
     e.preventDefault();
     console.log(users); 
@@ -72,7 +82,7 @@ const handleChange = (e) => {
     <div className="user-container bg-gray-100 py-4">
             <h1>Formulario de editar Usuario</h1>
 
-      <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4" t>
+      <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4" >
       <h2 className="text-2xl font-bold text-center">Formulario de editar Usuario</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
@@ -101,6 +111,19 @@ const handleChange = (e) => {
           <option value="teacher">Profesor</option>
           <option value="director">director</option>
         </select>
+         <select
+            name="school_id"
+            value={users.school_id}
+            onChange={handleChange}
+            className="input"
+          >
+            <option value="">Seleccionar escuela</option>
+            {schools.map((school) => (
+              <option key={school._id || school.id} value={school._id || school.id}>
+                {school.name || school.schoolName}
+              </option>
+            ))}
+          </select>
       </div>
 
       

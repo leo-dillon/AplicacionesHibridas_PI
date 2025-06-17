@@ -23,6 +23,7 @@ const NavBar = () => {
           Escuelas Registradas
       </Link>
       </li>
+      
     </ul>
   )
 }

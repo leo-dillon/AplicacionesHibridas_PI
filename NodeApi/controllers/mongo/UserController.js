@@ -31,7 +31,8 @@ export class UserController {
 		const data = {
 			id: 	user._id,
 			email: 	user.email,
-			role: 	user.role
+			role: 	user.role,
+			School:  user.school_id
 		};
 		const token = jsonWebToken.sign(data, SECRET_KEY, { expiresIn: '1h' });
 		return res.json({

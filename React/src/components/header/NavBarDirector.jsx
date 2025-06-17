@@ -18,6 +18,11 @@ const NavBarAdmin = ({ handleLogout }) => {
             Escuelas Registradas
         </Link>
       </li>
+      <li className="flex items-center">
+      <Link to="/Notificados" className="text-white transition duration-300">
+          Notificaciones
+      </Link>
+      </li>
       <li>
         <button
           onClick = { handleLogout }

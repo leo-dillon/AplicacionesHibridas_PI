@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/AuthContext"
 import NavBar from "./NavBar"
 import NavBarAdmin from "./NavBarAdmin"
+import NavBarDirector from "./NavBarDirector"
 
 const Header = ( ) => {
   
@@ -28,7 +29,7 @@ const Header = ( ) => {
         return "estudiante"
 
       case 'director':
-        return 'director'
+        return <NavBarDirector handleLogout = { handleLogout } />
 
       case 'Admin':
         return <NavBarAdmin handleLogout = { handleLogout } />
