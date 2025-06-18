@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { Link } from 'react-router-dom';
 
 
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
@@ -8,11 +9,16 @@ const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 const AnnouncementList = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
-
+ const [isDirector, setIsDirector] = useState(false);
   // Cargar todos los usuarios al inicio 
   useEffect(() => {   
      const token = localStorage.getItem('jwt');
-      const decoded = jwtDecode(token);
+     const decoded = jwtDecode(token);
+     const role = decoded['role']
+      if (role === 'director') {
+      setIsDirector(true);
+    }
+    
       const schoolId = decoded['School'];  
        if (!schoolId) {
         setErrorMsg('No estás asociado a ninguna escuela.');
@@ -20,14 +26,30 @@ const AnnouncementList = () => {
       }                
     fetch(`${DynamicUrl}/announcement/${schoolId}`)
       .then(res => res.json())
-      .then(data => setAnnouncements(data.data))
+        //ordena de mas nuevo a mas viejo
+      .then(data => { 
+        const sorted = data.data.sort((a, b) => new Date(b.create_at) - new Date(a.create_at));
+  setAnnouncements(sorted);
+})
+
       .catch(err => console.error('Error inicial:', err));
   }, []);
   
   
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Lista de Anuncios</h1>
+      <div className="flex justify-between items-center mb-4 mx-4">
+  <h1 className="text-2xl font-bold">Lista de Comunicados</h1>
+  {isDirector && (
+    <Link
+      to={`/Crear_Comunicados`}
+      className="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
+    >
+      Agregar Comunicado
+    </Link>
+  )}
+</div>
+
        <section className="space-y-4">
         {errorMsg ? (
           <p className="text-red-600 text-center">{errorMsg}</p>
@@ -37,9 +59,10 @@ const AnnouncementList = () => {
               key={notification._id}
               className="shadow-md bg-white rounded-xl border border-gray-200 p-5 transition hover:shadow-lg"
             >
-              <p className="text-gray-800 text-base mb-2">
-                {notification.message}
-              </p>
+              <div className="text-gray-800 text-base mb-2"
+                 dangerouslySetInnerHTML={{ __html: notification.message }}>
+                  
+                 </div>
               <p className="text-sm text-gray-500">
                 Publicado el: {new Date(notification.create_at).toLocaleString()}
               </p>

@@ -19,7 +19,7 @@ const NavBarAdmin = ({ handleLogout }) => {
         </Link>
       </li>
       <li className="flex items-center">
-      <Link to="/Notificados" className="text-white transition duration-300">
+      <Link to="/Comunicados" className="text-white transition duration-300">
           Notificaciones
       </Link>
       </li>

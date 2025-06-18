@@ -9,7 +9,8 @@ import SchoolsList from '../pages/schools/SchoolList';
 import SchoolPostForm from '../pages/schools/SchoolPostForm';                             
 import SchoolEditForm from '../pages/schools/SchoolsPutForm';      
 
-import NotificadosList from '../components/announcement/notificadosList';      
+import NotificadosList from '../pages/announcement/notificadosList';      
+import CrearNotificados from '../pages/announcement/crearNotificados';   
 
 import NotFound from '../pages/NotFound';
 import Userlogin from '../pages/users/Userlogin';
@@ -36,8 +37,9 @@ const TodoApp = () => {
           <Route path='/Editar_Escuela/:id' element={<SchoolEditForm />} />
           <Route path='/Lista_Escuela' element={<SchoolsList />} />
           // {/*AnnouncementList*/}
-          <Route path='/Notificados' element={<NotificadosList/>} />
-          
+          <Route path='/Comunicados' element={<NotificadosList/>} />
+          <Route path='/Crear_Comunicados' element={<CrearNotificados/>} />
+
           <Route path='*' element={<NotFound />}/>
         </Routes>
     
