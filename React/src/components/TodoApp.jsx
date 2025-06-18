@@ -19,7 +19,7 @@ import '../index.css';
 
 const TodoApp = () => {        
   return (
-    <>
+    <div className='grid grid-rows-[100px_1fr_100px] min-h-screen'>
       <AuthProvider>
 
         <Header/>
@@ -44,7 +44,7 @@ const TodoApp = () => {
         <Footer/>
 
       </AuthProvider>
-    </>
+    </div>
   );
 };
 
