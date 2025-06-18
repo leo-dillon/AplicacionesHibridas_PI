@@ -57,6 +57,27 @@ export class AnnouncementController {
             })
         }        
     }
+static async getAnnouncementById(req, res) {
+  try {
+    console.log('ID recibido:', req.params.announcement_id);
+    const announcement = await AnnouncementModel.findById(req.params.announcement_id);
+    console.log('Announcement encontrado:', announcement);
+    if (!announcement) {
+      return res.status(404).json({
+        message: "No se encontró el comunicado solicitado."
+      });
+    }
+    res.json({
+      data: announcement
+    });
+  } catch (error) {
+    console.error('Error en getAnnouncementById:', error);
+    res.status(500).json({
+      message: "Error al obtener el comunicado",
+      error
+    });
+  }
+}
 
     static async patchAnnouncement(req, res){
         try {

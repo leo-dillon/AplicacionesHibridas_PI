@@ -152,6 +152,8 @@ routerAnnouncement.delete ('/:announcement_id', AnnouncementController.deleteAnn
  *       500:
  *         description: Server error
  */
-routerAnnouncement.patch ('/:announcement_id', AnnouncementController.patchAnnouncement )
+routerAnnouncement.put ('/:announcement_id', AnnouncementController.patchAnnouncement )
+
+routerAnnouncement.get ('/anuncio/:announcement_id', AnnouncementController.getAnnouncementById )
 
 export default routerAnnouncement

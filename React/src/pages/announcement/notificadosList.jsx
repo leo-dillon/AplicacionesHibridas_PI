@@ -34,7 +34,23 @@ const AnnouncementList = () => {
 
       .catch(err => console.error('Error inicial:', err));
   }, []);
-  
+
+  const handleDelete = async (id) => {
+  if (!confirm("¿Estás seguro de que querés eliminar este comunicado?")) return;
+  try {
+    const token = localStorage.getItem('jwt');
+    fetch(`${DynamicUrl}/announcement/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+      setAnnouncements((prev) => prev.filter(item => item._id !== id));
+    
+  } catch (error) {
+    console.error("Error en la petición DELETE:", error);
+  }
+};
   
   return (
     <div>
@@ -55,10 +71,8 @@ const AnnouncementList = () => {
           <p className="text-red-600 text-center">{errorMsg}</p>
         ) : announcements.length > 0 ? (
           announcements.map((notification) => (
-            <div
-              key={notification._id}
-              className="shadow-md bg-white rounded-xl border border-gray-200 p-5 transition hover:shadow-lg"
-            >
+            <div>
+              <div key={notification._id} className="shadow-md bg-white rounded-xl border border-gray-200 px-5  py-2 transition hover:shadow-lg">
               <div className="text-gray-800 text-base mb-2"
                  dangerouslySetInnerHTML={{ __html: notification.message }}>
                   
@@ -66,7 +80,21 @@ const AnnouncementList = () => {
               <p className="text-sm text-gray-500">
                 Publicado el: {new Date(notification.create_at).toLocaleString()}
               </p>
+              {isDirector && (
+              <div>
+                <hr className=" border-gray-300" />
+                <div className="flex justify-end gap-3">
+                  <Link to={`/Editar_Comunicado/${notification._id}`} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                  Editar
+                  </Link>
+                  <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"  onClick={() => handleDelete(notification._id)}>Eliminar</button>
+                </div>
+              </div>
+              )}
             </div>
+            </div>
+            
+            
           ))
         ) : (
           <p className="text-gray-500 text-center">No se encontraron anuncios.</p>

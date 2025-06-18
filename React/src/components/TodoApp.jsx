@@ -11,6 +11,7 @@ import SchoolEditForm from '../pages/schools/SchoolsPutForm';
 
 import NotificadosList from '../pages/announcement/notificadosList';      
 import CrearNotificados from '../pages/announcement/crearNotificados';   
+import EditarNotificados from '../pages/announcement/editarNotificados';   
 
 import NotFound from '../pages/NotFound';
 import Userlogin from '../pages/users/Userlogin';
@@ -39,6 +40,7 @@ const TodoApp = () => {
           // {/*AnnouncementList*/}
           <Route path='/Comunicados' element={<NotificadosList/>} />
           <Route path='/Crear_Comunicados' element={<CrearNotificados/>} />
+          <Route path="/Editar_Comunicado/:id" element={<EditarNotificados />} />
 
           <Route path='*' element={<NotFound />}/>
         </Routes>
