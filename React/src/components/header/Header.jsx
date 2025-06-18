@@ -20,13 +20,13 @@ const Header = ( ) => {
   const NavRender = () => {
     switch (UserRole) {
       case "teacher": 
-        return "Profesor"
+        return <NavBarDirector handleLogout = { handleLogout } /> 
 
       case "parent":
-        return "Padre"
+        return <NavBarDirector handleLogout = { handleLogout } />
 
       case 'student':
-        return "estudiante"
+        return <NavBarDirector handleLogout = { handleLogout } />
 
       case 'director':
         return <NavBarDirector handleLogout = { handleLogout } />
