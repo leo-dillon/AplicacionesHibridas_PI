@@ -42,7 +42,7 @@ const Header = ( ) => {
     <>
       <header className="p-4 flex flex-row justify-between items-center bg-gray-800">
         <div className="flex items-center text-white">
-          <h1>
+          <h1 className="text-white text-4xl font-bold">
             Piccino / Dillon
           </h1>
         </div>

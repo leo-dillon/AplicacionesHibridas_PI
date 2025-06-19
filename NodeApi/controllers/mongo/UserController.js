@@ -41,6 +41,14 @@ export class UserController {
 		});
 	}
 
+	static async getLastsUsers(req, res){
+		try{
+			const users = await UserModel.find().sort({createdAt: -1}).limit(2)
+			res.status(200).json(users)
+		} catch ( error ) {
+			res.status(500).json({ error: error.message })
+		}
+	}
 
 	static async getUsers(req, res) {
 		try {
@@ -124,29 +132,35 @@ export class UserController {
 	}
 
 	static async editUserById(req, res) {
-  try {
-    const updates = { ...req.body };
+		try {
+			const updates = { ...req.body };
 
-    // Si se incluye una nueva contraseña, hashearla
-	
-    if (updates.password) {
-  if (updates.password.trim() !== '') {
-    updates.password = await bcrypt.hash(updates.password, salt);
-  } else {
-    delete updates.password; // No se actualiza si está vacío
-  }
-}
-    const user = await UserModel.findByIdAndUpdate(req.params.id, updates, {
-      new: true,
-    });
-    res.status(200).json({
-      message: "Usuario actualizado correctamente",
-      data: user,
-    });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-}
+			// Si se incluye una nueva contraseña, hashearla
+			
+			if (updates.password) {
+				if (updates.password.trim() !== '') {
+					updates.password = await bcrypt.hash(updates.password, salt);
+				} else {
+					delete updates.password; // No se actualiza si está vacío
+				}
+			}
+			if( !(updates.school_id) ){
+				updates.school_id = null
+			} 
+			const user = await UserModel.findByIdAndUpdate(req.params.id, updates, {
+			new: true,
+			});
+			res.status(200).json({
+				message: "Usuario actualizado correctamente",
+				data: updates,
+			});
+		} catch (error) {
+			res.status(400).json({ 
+				error: error.message,
+				data: updates
+			});
+		}
+	}
 
 
 	static async deleteUserById(req, res) {

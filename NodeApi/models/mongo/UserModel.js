@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     address:       { type: String },
     phone:         { type: String },
     password:      { type: String, required: true },
-    school_id:     { type: mongoose.Schema.Types.ObjectId, ref: 'School', required: false },
+    school_id:     { type: mongoose.Schema.Types.ObjectId, ref: 'School', required: false, default: null },
     createdAt:     { type: Date, default: Date.now },
     lastLogin:     { type: Date },
     active:        { type: Boolean, default: true },

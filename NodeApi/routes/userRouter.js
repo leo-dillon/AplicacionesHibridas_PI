@@ -113,6 +113,24 @@ routerUser.get("/", UserController.getUsers)
 
 /**
  * @swagger
+ * /users:
+ *   get:
+ *     summary: Return the last user created
+ *     tags: [User]
+ *     responses:
+ *       200:
+ *         description: User List
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
+ */
+routerUser.get("/lastUser", UserController.getLastsUsers)
+
+/**
+ * @swagger
  *  /users/{id}:
  *    get:
  *      summary: Get User by id

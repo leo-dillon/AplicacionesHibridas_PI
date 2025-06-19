@@ -18,6 +18,15 @@ export class schoolController{
             res.status(400).json({ message: `Escuela no encontrada.` });
         }
     }
+
+    static async getLastsSchools(req, res){
+        try{
+            const schools = await SchoolModel.find().limit(2)
+            res.status(200).json(schools)
+        } catch ( error ) {
+            res.status(500).json({ error: error.message })
+        }
+    }
     
     static async getSchoolProvince (req, res){
         try {

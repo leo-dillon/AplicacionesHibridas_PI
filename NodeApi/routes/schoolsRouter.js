@@ -106,6 +106,24 @@ routerSchool.get("/", schoolController.getSchool)
 
 /**
  * @swagger
+ * /school:
+ *   get:
+ *     summary: Return the last schools created
+ *     tags: [School]
+ *     responses:
+ *       200:
+ *         description: School List
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/School'
+ */
+routerSchool.get("/lastSchool", schoolController.getLastsSchools)
+
+/**
+ * @swagger
  * /school/{id}:
  *   get:
  *     summary: Get school by ID

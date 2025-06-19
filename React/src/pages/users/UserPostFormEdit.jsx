@@ -53,14 +53,13 @@ const UserPostFormEdit = () => {
 
    const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(users); 
-fetch(`${DynamicUrl}/users/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(users), 
-  })
+    fetch(`${DynamicUrl}/users/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(users), 
+    })
     .then(() => {
       navigate('/Lista_Usuarios'); 
     })
