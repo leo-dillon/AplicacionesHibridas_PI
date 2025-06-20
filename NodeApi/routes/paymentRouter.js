@@ -101,6 +101,24 @@ routerPayment.get('/', PaymentController.getPayments )
 
 /**
  * @swagger
+ * /payment:
+ *   get:
+ *     summary: Return the list of all unapproved payments
+ *     tags: [Payment]
+ *     responses:
+ *       200:
+ *         description: Payment List
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Payment'
+ */
+routerPayment.get('/unapproved', PaymentController.getPaymentsUnapproved )
+
+/**
+ * @swagger
  * /payment:    
  *   post:
  *     summary: create a new payment

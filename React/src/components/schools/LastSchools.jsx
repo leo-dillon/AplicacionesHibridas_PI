@@ -13,7 +13,6 @@ const LastSchools = () => {
             .then(res => res.json())
             .then(data => {
                 setSchools(data)
-                console.log(data)
                 setTimeout(() => {
                     setLoading(false)
                 }, 300);
@@ -21,17 +20,17 @@ const LastSchools = () => {
     },[])
     
     return (
-        <>
-        <h2 className="text-3xl text-gray-700 font-bold"> Ultimas Escuelas registrados </h2>
-        <div className="flex gap-12 justify-center items-center">
-        {
-            ( loading ) 
-            ? <p className="w-full text-center text-xl text-gray-600"> cargando los datos del usuario</p>
-            : schools.map( school => <SmallDataschool school={school} />
-            )
-        }
+        <div className="group">
+            <h2 className="mb-4 border-b border-gray-100 text-3xl text-gray-700 font-bold  group-hover:border-gray-400 trnasition duration-300"> Ultimas Escuelas registrados </h2>
+            <div className="flex min-h-content gap-12 justify-center items-center">
+                {
+                    ( loading ) 
+                        ? <p className="w-full text-center text-xl text-gray-600"> cargando los datos del usuario</p>
+                        : schools.map( school => <SmallDataschool school={school} />
+                    )
+                }
+            </div>
         </div>
-        </>
     )
 }
 

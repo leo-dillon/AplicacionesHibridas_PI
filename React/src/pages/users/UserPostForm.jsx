@@ -22,14 +22,14 @@ const UserPostForm = () => {
    const handleSubmit = (e) => {
     e.preventDefault();
     console.log(users); 
-fetch(`${DynamicUrl}/users`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(users), 
-  })
-    navigate('/');
+    fetch(`${DynamicUrl}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(users), 
+      })
+      navigate('/');
   }
 const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

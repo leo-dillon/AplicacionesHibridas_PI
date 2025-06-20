@@ -20,17 +20,17 @@ const LastUsers = () => {
     },[])
 
     return(
-        <>
-            <h2 className="text-3xl text-gray-700 font-bold"> Ultimos Usuarios registrados </h2>
-            <div className="flex gap-12 justify-center items-center">
-            {
-                ( loading ) 
-                ? <p className="w-full text-center text-xl text-gray-600"> cargando los datos del usuario</p>
-                : users.map( user => <SmallDataUser user={user} />
-                )
-            }
+        <div className="group">
+            <h2 className="mb-4 border-b border-gray-100 text-3xl text-gray-700 font-bold group-hover:border-gray-400 duration-300"> Ultimos Usuarios registrados </h2>
+            <div className="min-h-content flex gap-12 justify-center items-center">
+                {
+                    ( loading ) 
+                        ? <p className="w-full text-center text-xl text-gray-600"> cargando los datos del usuario</p>
+                        : users.map( user => <SmallDataUser user={user} />
+                    )
+                }
             </div>
-        </>
+        </div>
     )
 }
 

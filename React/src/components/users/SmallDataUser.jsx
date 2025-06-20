@@ -4,7 +4,7 @@ const SmallDataUser = ({ user }) => {
     return (
         <div
             key={user._id}
-            className="user-card flex-1 w-[300px] border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
+            className="user-card flex-1 max-w-[400px] h-full border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
         >
             <h3 className="text-lg font-bold text-gray-800 mb-2">{user.firstName} {user.lastName}</h3>
             <hr className="border-gray-300 mb-3" />

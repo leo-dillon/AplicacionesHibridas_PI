@@ -3,6 +3,7 @@ import { AuthContext } from "../../contexts/AuthContext"
 import DatosUser from "../users/DatosUser"
 import LastUsers from "../users/LastUsers"
 import LastSchools from "../schools/LastSchools"
+import PaymentRequests from "../payment/PaymentRequests"
 
 function HomeLogged(){
 
@@ -15,6 +16,7 @@ function HomeLogged(){
                 <DatosUser id = { id }/>
                 <LastUsers />
                 <LastSchools />
+                <PaymentRequests />
             </main>
         </>
     )

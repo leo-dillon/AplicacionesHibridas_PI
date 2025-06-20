@@ -17,6 +17,21 @@ export class PaymentController {
         }
     }
 
+    static async getPaymentsUnapproved( req, res ){
+        try {
+            const payments = await PaymentModel.where("status", "pending")
+            res.json({
+                message: "Payments encontrados",
+                data: payments
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: "Error",
+                data: error
+            })
+        }
+    }
+
     static async createPayment( req, res ){
         const user_id = req.body.issuedTo
 
