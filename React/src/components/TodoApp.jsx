@@ -12,7 +12,7 @@ import SchoolEditForm from '../pages/schools/SchoolsPutForm';
 import NotificadosList from '../pages/announcement/notificadosList';      
 import CrearNotificados from '../pages/announcement/crearNotificados';   
 import EditarNotificados from '../pages/announcement/editarNotificados';   
-
+import RealizarPago from '../pages/payment/CreatePaymentForm';
 import NotFound from '../pages/NotFound';
 import Userlogin from '../pages/users/Userlogin';
 import Home from '../pages/Home';
@@ -41,6 +41,9 @@ const TodoApp = () => {
           <Route path='/Comunicados' element={<NotificadosList/>} />
           <Route path='/Crear_Comunicados' element={<CrearNotificados/>} />
           <Route path="/Editar_Comunicado/:id" element={<EditarNotificados />} />
+
+          // {/*Payment*/}
+          <Route path='/Realizar_Pago' element={<RealizarPago/>} />
 
           <Route path='*' element={<NotFound />}/>
         </Routes>

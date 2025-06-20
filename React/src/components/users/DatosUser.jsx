@@ -4,6 +4,7 @@ import Famele from "../icons/Famele"
 import User from "../icons/User"
 import { Link } from "react-router-dom"
 
+import UltimoPago from "../../components/payments/verPago"
 
 
 const DatosUser = ({ id }) => {
@@ -22,7 +23,7 @@ const DatosUser = ({ id }) => {
                     setLoading(false)
                 }, 300);
             })
-    }, [] )
+    },[])
 
     const genreIcon = (genre) => {
         let elegido 
@@ -42,7 +43,13 @@ const DatosUser = ({ id }) => {
 
     return (
         <div>
-            <h2 className="text-3xl text-gray-700 font-bold"> Perfil { user?.role } </h2>
+             <h2 className="text-3xl text-gray-700 font-bold"> Perfil { user?.role } </h2>
+              {user?.role === 'director' && (
+             <div>
+               <UltimoPago />
+             </div>
+)}             
+            
             <small className="text-gray-500"> En está página puedes ver todos tus datos </small>
             <div className="mt-6 flex gap-4 w-full p-4 border border-gray-400 rounded-3xl">
                 {
