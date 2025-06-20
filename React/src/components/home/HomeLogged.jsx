@@ -3,7 +3,7 @@ import { AuthContext } from "../../contexts/AuthContext"
 import DatosUser from "../users/DatosUser"
 import LastUsers from "../users/LastUsers"
 import LastSchools from "../schools/LastSchools"
-import PaymentRequests from "../payment/PaymentRequests"
+import PaymentRequests from "../payments/PaymentRequests"
 
 function HomeLogged(){
 

@@ -52,7 +52,7 @@ const SmallDataPayment = ({ payment, key }) => {
             ( userName.length > 2 )
                 ?   <div
                         key={ key }
-                        className="user-card flex-1 max-w-[400px] h-full border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
+                        className="user-card flex-1 max-w-[400px] h-full border border-gray-300 rounded-xl p-4 text-center bg-gray-100 {}"
                     >
                         <h2 className="text-3xl text-gray-700 font-bold"> { userName } </h2>
                         <p className="p-2 w-full text-start text-gray-800">
