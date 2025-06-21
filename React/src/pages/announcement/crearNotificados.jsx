@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate  } from 'react-router-dom';
+import '../../../public/editor.css'; 
 
 //editor mejorado 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -93,7 +94,7 @@ const CrearNotificados  = () => {
       <label htmlFor="message-editor" className="block text-gray-700 font-semibold mb-2" >
         Escribí tu comunicado
       </label>
-      <div id="message-editor" className="border border-gray-300 ">
+      <div id="message-editor" className=" HTMLForzado border border-gray-300 ">
         <CKEditor
           editor={ClassicEditor}
           data={message}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
+import '../../../public/editor.css'; 
 
 
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
@@ -73,10 +74,8 @@ const AnnouncementList = () => {
           announcements.map((notification) => (
             <div>
               <div key={notification._id} className="shadow-md bg-white rounded-xl border border-gray-200 px-5  py-2 transition hover:shadow-lg">
-              <div className="text-gray-800 text-base mb-2"
-                 dangerouslySetInnerHTML={{ __html: notification.message }}>
-                  
-                 </div>
+              <div className="HTMLForzado max-w-none text-gray-800 mb-2"
+                  dangerouslySetInnerHTML={{ __html: notification.message }}></div>
               <p className="text-sm text-gray-500">
                 Publicado el: {new Date(notification.create_at).toLocaleString()}
               </p>

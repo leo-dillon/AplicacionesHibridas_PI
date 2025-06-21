@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '../../../public/editor.css'; 
 
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 const EditarNotificados = () => {
@@ -57,7 +58,7 @@ const EditarNotificados = () => {
           <label htmlFor="message-editor" className="block text-gray-700 font-semibold mb-2">
             Modificá el comunicado
           </label>
-          <div id="message-editor" className="border border-gray-300">
+          <div id="message-editor" className=" HTMLForzado border border-gray-300">
             <CKEditor
               editor={ClassicEditor}
               data={message}
