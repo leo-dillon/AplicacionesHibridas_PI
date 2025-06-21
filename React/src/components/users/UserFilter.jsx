@@ -30,13 +30,13 @@ const UserFilter = ({ apiUrl, onResult }) => {
       <input
         type="serch"
         placeholder="Buscar por email"
-        className="p-2 border border-gray-400 rounded w-[250px]"
+        className="min-w-75 p-2 border border-gray-400 rounded w-[250px]"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <button
         onClick={buscarPorEmail}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        className="min-w-25 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
       >
         Buscar
       </button>
@@ -45,7 +45,7 @@ const UserFilter = ({ apiUrl, onResult }) => {
           setEmail('');
           obtenerTodos();
         }}
-        className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+        className="min-w-25 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
       >
         Ver Todos
       </button>

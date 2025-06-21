@@ -12,18 +12,7 @@ const NavBar = () => {
       <Link to="/Iniciar_Sesion" className="text-white transition duration-300">
           Iniciar Sesion
       </Link>
-      </li>
-      <li className="flex items-center">
-      <Link to="/Lista_Usuarios" className="text-white transition duration-300">
-          Usuarios Registrados
-      </Link>
-      </li>
-      <li className="flex items-center">
-      <Link to="/Lista_Escuela" className="text-white transition duration-300">
-          Escuelas Registradas
-      </Link>
-      </li>
-      
+      </li> 
     </ul>
   )
 }

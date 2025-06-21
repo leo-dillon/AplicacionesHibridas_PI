@@ -1,9 +1,8 @@
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
 import DatosUser from "../users/DatosUser"
-import LastUsers from "../users/LastUsers"
-import LastSchools from "../schools/LastSchools"
-import PaymentRequests from "../payments/PaymentRequests"
+import HomeAdmin from "./HomeAdmin"
+import HomeUser from "./HomeUser"
 
 function HomeLogged(){
 
@@ -14,9 +13,11 @@ function HomeLogged(){
         <>
             <main className="flex flex-col gap-12 p-6 overflow-y-auto">
                 <DatosUser id = { id }/>
-                <LastUsers />
-                <LastSchools />
-                <PaymentRequests />
+                {
+                    ( userData.role == 'Admin' )
+                        ? <HomeAdmin />
+                        : <HomeUser />
+                }
             </main>
         </>
     )

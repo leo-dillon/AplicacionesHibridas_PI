@@ -2,20 +2,26 @@ import { useState } from "react"
 import { useEffect } from "react"
 
 const SmallDataPayment = ({ payment, key }) => {
-    
     const DynamicUrl = import.meta.env.VITE_DynamicUrl
-    const [userName, setUserName] = useState("")
+    const [userName, setUserName] = useState()
     const [loading, setLoading ] = useState(true)
 
-    useEffect( () => {
-        fetch(`${DynamicUrl}/users/${payment.issuedTo}`)
-            .then(res => res.json())
-            .then(data => {
-                if( !data.error){
-                    setUserName(`${data.firstName} ${data.lastName}`)
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await fetch(`${DynamicUrl}/users/${payment.issuedTo}`);
+                const data = await res.json();
+                if (data.firstName.length > 2) {
+                    setUserName(data.firstName);
                 }
-            })
-    },[])
+            } catch {
+                setUserName(true);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchUser();
+    }, []);
     
     const handleSubmitAprobar = (e) => {
         e.preventDefault()
@@ -49,28 +55,30 @@ const SmallDataPayment = ({ payment, key }) => {
     return (
         <>
         {
-            ( userName.length > 2 )
+            ( !loading && userName )
                 ?   <div
                         key={ key }
-                        className="user-card flex-1 max-w-[400px] h-full border border-gray-300 rounded-xl p-4 text-center bg-gray-100 {}"
+                        className="user-card flex flex-col justify-between min-h-50 w-[300px] border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
                     >
                         <h2 className="text-3xl text-gray-700 font-bold"> { userName } </h2>
                         <p className="p-2 w-full text-start text-gray-800">
                             <span className="text-gray-900 font-semibold"> Intención: </span> 
                             {payment.concept}
                         </p>
-                         <p className="p-2 w-full text-start text-gray-800">
+                        <p className="p-2 w-full text-start text-gray-800">
                             <span className="text-gray-900 font-semibold"> Monto : </span> 
-                            {payment.amount}
+                            {payment.amount} $
                         </p>
-                        <form onSubmit={handleSubmitAprobar} method="post">
-                            <button type="submit"> Aprobar </button>
-                        </form>
-                        <form onSubmit={handleSubmitDesaprobar} method="post">
-                            <button type="submit"> Denegar </button>
-                        </form>
-                    </div>
-                :  ""
+                        <div className="w-full flex gap-2">
+                            <form onSubmit={handleSubmitAprobar} method="post" className="w-full">
+                                <button type="submit" className="w-full text-green-500 border hover:text-green-800 transition cursor-pointer rounded"> Aprobar </button>
+                            </form>
+                            <form onSubmit={handleSubmitDesaprobar} method="post" className="w-full">
+                                <button type="submit" className="w-full text-red-500 border hover:text-red-800 transition cursor-pointer rounded"> Denegar </button>
+                            </form>
+                        </div>
+                    </div>  
+                :   "" 
         } 
         </>
     )

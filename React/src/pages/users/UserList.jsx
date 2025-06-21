@@ -19,17 +19,18 @@ const UserList = () => {
   }, []);
 
   return (
-    <div>
+    <div className='w-full max-w-9/10 mx-auto py-8'>
       <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
+      <div className=''>
+        <UserFilter apiUrl={DynamicUrl} onResult={setUsers} />
+        <GenderFilter apiUrl={DynamicUrl} onResult={setUsers} />
+        <FirstNameFilter apiUrl={DynamicUrl} onResult={setUsers} />
+      </div>
 
-      <UserFilter apiUrl={DynamicUrl} onResult={setUsers} />
-      <GenderFilter apiUrl={DynamicUrl} onResult={setUsers} />
-      <FirstNameFilter apiUrl={DynamicUrl} onResult={setUsers} />
-
-      <div className="user-container bg-amber-300 flex flex-nowrap overflow-x-auto gap-4 p-4">
+      <div className="bg-amber-300/70 flex flex-wrap gap-5 justify-center p-4 rounded-2xl">
         {users.length > 0 ? (
           users.map(user => (
-            <SmallDataUser user={user} />
+            <SmallDataUser user={user} key={user._id} />
           ))
         ) : (
           <p className="text-red-600">No se encontraron usuarios.</p>

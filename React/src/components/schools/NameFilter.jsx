@@ -26,13 +26,13 @@ const FirstNameFilter =({apiUrl, onResult })=>{
       <input
         type="search"
         placeholder="Buscar por nombre"
-        className="p-2 border border-gray-400 rounded w-[250px]"
+        className="min-w-75 p-2 border border-gray-400 rounded w-[250px]"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <button
         onClick={buscarPorName}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        className="min-w-25 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
       >
         Buscar
       </button>
@@ -41,7 +41,7 @@ const FirstNameFilter =({apiUrl, onResult })=>{
           setName('');
           obtenerTodos();
         }}
-        className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+        className="min-w-25 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
       >
         Ver Todos
       </button>

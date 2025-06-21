@@ -28,7 +28,7 @@ const TypeFilter = ({ apiUrl, onResult }) => {
   return (
     <div className="flex gap-4 items-center mb-6">
       <select
-        className="p-2 border border-gray-400 rounded"
+        className="min-w-75 p-2 border border-gray-400 rounded"
         value={type}
         onChange={(e) => setType(e.target.value)}
       >
@@ -41,14 +41,14 @@ const TypeFilter = ({ apiUrl, onResult }) => {
 
       <button
         onClick={buscarPorType}
-        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        className="min-w-25 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
       >
         Filtrar
       </button>
 
       <button
         onClick={resetear}
-        className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+        className="min-w-25 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
       >
         Ver Todos
       </button>

@@ -21,7 +21,7 @@ const NavBarAdmin = ({ handleLogout }) => {
       <li>
         <button
           onClick = { handleLogout }
-          className="text-white transition duration-300"
+          className="text-white transition duration-300 cursor-pointer"
         >
           Cerrar Sesion
         </button>

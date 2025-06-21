@@ -26,7 +26,7 @@ const LastUsers = () => {
                 {
                     ( loading ) 
                         ? <p className="w-full text-center text-xl text-gray-600"> cargando los datos del usuario</p>
-                        : users.map( user => <SmallDataUser user={user} />
+                        : users.map( user => <SmallDataUser user={user} key={user._id} />
                     )
                 }
             </div>

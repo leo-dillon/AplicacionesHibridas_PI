@@ -26,7 +26,7 @@ const LastSchools = () => {
                 {
                     ( loading ) 
                         ? <p className="w-full text-center text-xl text-gray-600"> cargando los datos del usuario</p>
-                        : schools.map( school => <SmallDataschool school={school} />
+                        : schools.map( school => <SmallDataschool school={school} key={school._id}/>
                     )
                 }
             </div>

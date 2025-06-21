@@ -5,28 +5,28 @@ const NavBarAdmin = ({ handleLogout }) => {
     <ul className="flex space-x-6 justify-center items-center m-0">
       <li className="flex items-center">
         <Link to="/" className="text-white transition duration-300">
-            Home
+          Home
         </Link>
       </li>
       <li className="flex items-center">
         <Link to="/Lista_Usuarios" className="text-white transition duration-300">
-            Usuarios Registrados
+          Usuarios Registrados
         </Link>
       </li>
       <li className="flex items-center">
         <Link to="/Lista_Escuela" className="text-white transition duration-300">
-            Escuelas Registradas
+          Escuelas Registradas  
         </Link>
       </li>
       <li className="flex items-center">
-      <Link to="/Comunicados" className="text-white transition duration-300">
+        <Link to="/Comunicados" className="text-white transition duration-300">
           Notificaciones
-      </Link>
+        </Link>
       </li>
       <li>
         <button
           onClick = { handleLogout }
-          className="text-white transition duration-300"
+          className="text-white transition duration-300 cursor-pointer"
         >
           Cerrar Sesion
         </button>

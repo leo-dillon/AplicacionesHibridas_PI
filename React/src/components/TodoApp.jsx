@@ -18,6 +18,7 @@ import Userlogin from '../pages/users/Userlogin';
 import Home from '../pages/Home';
 import Header from './header/Header';
 import '../index.css';
+import AdminRoutes from './protectedRoutes/AdminRutes';
 
 const TodoApp = () => {        
   return (
@@ -32,11 +33,19 @@ const TodoApp = () => {
           <Route path='/Crear_Usuario' element={<UserPostForm />} />
           <Route path='/Iniciar_Sesion' element={<Userlogin/>} />
           <Route path='/Editar_Usuario/:id' element={<UserPostFormEdit />} />
-          <Route path='/Lista_Usuarios' element={<UserList />} />
+          <Route path='/Lista_Usuarios' element={
+            <AdminRoutes >
+              <UserList />
+            </AdminRoutes>
+          } />
           // {/*Schools*/}
           <Route path='/Crear_Escuela' element={<SchoolPostForm />} />
           <Route path='/Editar_Escuela/:id' element={<SchoolEditForm />} />
-          <Route path='/Lista_Escuela' element={<SchoolsList />} />
+          <Route path='/Lista_Escuela' element={
+            <AdminRoutes>
+              <SchoolsList />
+            </AdminRoutes>
+          } />
           // {/*AnnouncementList*/}
           <Route path='/Comunicados' element={<NotificadosList/>} />
           <Route path='/Crear_Comunicados' element={<CrearNotificados/>} />

@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
 
-const SmallDataschool = ({ school }) => {
+const SmallDataSchool = ({ school, key }) => {
     return(
         <>
         <div
-            key={school._id}
-            className="school-card flex flex-col justify-between min-h-100 flex-1 max-w-[400px] border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
+            key = { key }
+            className="school-card flex flex-col justify-between min-h-100 w-[300px] border border-gray-300 rounded-xl p-4 text-center bg-gray-100"
         >
             <h3 className="text-xl text-center font-bold text-gray-800 mb-2">{school.name}</h3>
             <hr className="border-gray-300 mb-3" />
@@ -54,4 +54,4 @@ const SmallDataschool = ({ school }) => {
     )
 }
 
-export default SmallDataschool
+export default SmallDataSchool
