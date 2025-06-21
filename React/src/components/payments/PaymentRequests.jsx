@@ -6,26 +6,34 @@ const PaymentRequests = () => {
 
     const [loading, setLoading] = useState(true)
     const [payments, setPayments] = useState()
+    let paymentsUnaprobate
 
     useEffect( () => {
         fetch(`${DynamicUrl}/payment/unapproved`)
             .then(res => res.json())
             .then(data => {
-                setPayments(data)
+                paymentsUnaprobate = data.data.filter( (pay) => {
+                    if(pay.status == "loading" ){
+                        return pay
+                    }
+                })
+                setPayments(paymentsUnaprobate)
                 setLoading(false)
             })
     },[])
 
     return (  
-        <div className="group">
+        <div className="group min-h-40">
             <h2 className="mb-4 border-b border-gray-100 text-3xl text-gray-700 font-bold group-hover:border-gray-400 duration-300"> 
                 Pagos pendientes a aprobar 
             </h2>
-            <div className="w-full min-h-content flex gap-12 justify-center items-center">
+            <div className="w-full min-h-contentflex gap-12 justify-center items-center">
                 {
-                    ( loading ) 
-                        ? <p className="w-full text-center text-xl text-gray-600"> cargando los pagos de usuarios</p>
-                        : payments.data.map( (payment) => <SmallDataPayment payment={payment} key={payment._id} />)
+                    ( loading && paymentsUnaprobate ) 
+                        ? <p className="flex-1 w-full text-center text-xl text-gray-600"> cargando los pagos de usuarios</p>
+                        : ( paymentsUnaprobate?.length >= 1 ) 
+                            ? payments.data.map( (payment) => <SmallDataPayment payment={payment} key={payment._id} />)
+                            : <p className="w-full text-center text-xl text-gray-600"> No hay pagos por aprobar </p>
                 }
             </div>
         </div>
