@@ -193,4 +193,6 @@ routerPayment.put('/:id', PaymentController.editPayment )
  */
 routerPayment.delete('/:id', PaymentController.deletePayment )
 
+routerPayment.get('/issuedTo/:idShool', PaymentController.getPaymentid )
+routerPayment.get('/issuedToPaid/:idShool', PaymentController.getPaymentidPaid )
 export default routerPayment
