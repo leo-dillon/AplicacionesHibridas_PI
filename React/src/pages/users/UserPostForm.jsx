@@ -18,18 +18,50 @@ const UserPostForm = () => {
     role: '',
   });
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
-   const handleSubmit = (e) => {
+  const validate = () =>{
+    const newErrors = {};
+    if (!users.firstName) newErrors.firstName = 'El nombre es obligatorio';
+    if (!users.lastName) newErrors.lastName = 'El apellido es obligatorio';
+    if (!users.address) newErrors.address = 'La dirección es obligatoria';
+    if (!users.gender) newErrors.gender = 'El género es obligatorio';
+
+    if (!users.birthDate) newErrors.birthDate = 'La fecha de nacimiento es obligatoria';
+    else if (new Date(users.birthDate) > new Date()) newErrors.birthDate = 'La fecha no es valida';
+if (!users.dni) newErrors.dni = 'El DNI es obligatorio';
+    else if (!/^\d{7,}$/.test(users.dni)) newErrors.dni = 'El DNI debe tener al menos 7 números';
+
+    if (!users.email) newErrors.email = 'El email es obligatorio';
+    else if (!/\S+@\S+\.\S+/.test(users.email)) newErrors.email = 'El email no es válido';
+
+    if (!users.password) newErrors.password = 'La contraseña es obligatoria';
+    else if (users.password.length < 4) newErrors.password = 'Debe tener al menos 4 caracteres';
+
+    if (users.phone && !/^\+?\d{7,15}$/.test(users.phone)) newErrors.phone = 'Teléfono no válido';
+
+    if (!users.role) newErrors.role = 'El rol es obligatorio';
+
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+   const handleSubmit = async  (e) => {
     e.preventDefault();
-    console.log(users); 
+    if (!validate()) return;
+    try {
     fetch(`${DynamicUrl}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(users), 
-      })
+      });
+      
       navigate('/');
+    } catch (error) {
+      alert('Error al registrar usuario: ' + error.message);
+    }
   }
 const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -38,8 +70,6 @@ const handleChange = (e) => {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-  
-
 
   return (
     
@@ -63,9 +93,11 @@ const handleChange = (e) => {
             type="text"
             value={users.firstName}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
-          />
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    errors.firstName ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  }`}
+                />
+                {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
         </div>
 
         <div>
@@ -75,26 +107,30 @@ const handleChange = (e) => {
             type="text"
             value={users.lastName}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
-          />
+           className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    errors.lastName ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  }`}
+                />
+                {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Género</label>
-          <select
-            name="gender"
-            value={users.gender}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Seleccionar género</option>
-            <option value="Male">Masculino</option>
-            <option value="Female">Femenino</option>
-            <option value="Other">Otro</option>
-          </select>
-        </div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Género</label>
+              <select
+                name="gender"
+                value={users.gender}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                  errors.gender ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                }`}
+              >
+                <option value="">Seleccionar género</option>
+                <option value="Male">Masculino</option>
+                <option value="Female">Femenino</option>
+                <option value="Other">Otro</option>
+              </select>
+              {errors.gender && <p className="text-red-500 text-sm mt-1">{errors.gender}</p>}
+            </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de nacimiento</label>
@@ -103,9 +139,13 @@ const handleChange = (e) => {
             type="date"
             value={users.birthDate}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                    errors.birthDate ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  }`}
+            
           />
+          {errors.birthDate && <p className="text-red-500 text-sm mt-1">{errors.birthDate}</p>}
+
         </div>
 
         <div>
@@ -115,9 +155,13 @@ const handleChange = (e) => {
             type="text"
             value={users.dni}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                    errors.dni ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  }`}
+            
           />
+          {errors.dni && <p className="text-red-500 text-sm mt-1">{errors.dni}</p>}
+
         </div>
 
         <div>
@@ -127,9 +171,12 @@ const handleChange = (e) => {
             type="email"
             value={users.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                    errors.email ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  }`}
           />
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+
         </div>
 
         <div>
@@ -139,9 +186,13 @@ const handleChange = (e) => {
             type="text"
             value={users.address}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                    errors.address ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  }`}
+            
           />
+           {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
+
         </div>
 
         <div>
@@ -151,9 +202,13 @@ const handleChange = (e) => {
             type="tel"
             value={users.phone}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                    errors.phone ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  }`}
+            
           />
+           {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+
         </div>
 
         <div>
@@ -163,9 +218,13 @@ const handleChange = (e) => {
             type="password"
             value={users.password}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                    errors.password ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  }`}
+            
           />
+                     {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+
         </div>
 
         <div>
@@ -174,8 +233,10 @@ const handleChange = (e) => {
             name="role"
             value={users.role}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            required
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                  errors.role ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                }`}
+            
           >
             <option value="">Seleccionar rol</option>
             <option value="student">Estudiante</option>
@@ -183,6 +244,8 @@ const handleChange = (e) => {
             <option value="teacher">Profesor</option>
             <option value="director">Director</option>
           </select>
+          {errors.role && <p className="text-red-500 text-sm mt-1">{errors.role}</p>}
+
         </div>
       </div>
 

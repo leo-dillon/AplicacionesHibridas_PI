@@ -12,7 +12,7 @@ const DatosSchool = ({ id, role }) => {
             .then( res => res.json() )
             .then( data => {
                 setSchool(data)
-                setLoading(false)
+                // setLoading(false)
             })
     } , [] )
     return (
