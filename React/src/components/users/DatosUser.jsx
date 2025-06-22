@@ -9,8 +9,8 @@ import UltimoPago from "../../components/payments/verPago"
 
 const DatosUser = ({ id }) => {
     const DynamicUrl = import.meta.env.VITE_DynamicUrl
-    const [imgError, setImgError  ] = useState('true')  
     const [loading, setLoading] = useState(true)
+    const [imgError, setImgError  ] = useState('true')  
     const [user, setUser] = useState()
 
 
@@ -43,13 +43,12 @@ const DatosUser = ({ id }) => {
 
     return (
         <div>
-             <h2 className="text-3xl text-gray-700 font-bold"> Perfil { user?.role } </h2>
-              {user?.role === 'director' && (
-             <div>
-               <UltimoPago />
-             </div>
-)}             
-            
+            <h2 className="text-3xl text-gray-700 font-bold"> Perfil { user?.role } </h2>
+            {user?.role === 'director' && (
+                <div>
+                    <UltimoPago />
+                </div>
+            )}             
             <small className="text-gray-500"> En está página puedes ver todos tus datos </small>
             <div className="mt-6 flex gap-4 w-full p-4 border border-gray-400 rounded-3xl">
                 {

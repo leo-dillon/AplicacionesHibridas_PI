@@ -9,16 +9,6 @@ const NavBarAdmin = ({ handleLogout }) => {
         </Link>
       </li>
       <li className="flex items-center">
-        <Link to="/Lista_Usuarios" className="text-white transition duration-300">
-          Usuarios Registrados
-        </Link>
-      </li>
-      <li className="flex items-center">
-        <Link to="/Lista_Escuela" className="text-white transition duration-300">
-          Escuelas Registradas  
-        </Link>
-      </li>
-      <li className="flex items-center">
         <Link to="/Comunicados" className="text-white transition duration-300">
           Notificaciones
         </Link>

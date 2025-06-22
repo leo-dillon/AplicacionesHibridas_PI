@@ -16,7 +16,7 @@ function HomeLogged(){
                 {
                     ( userData.role == 'Admin' )
                         ? <HomeAdmin />
-                        : <HomeUser />
+                        : <HomeUser id = { id }/>
                 }
             </main>
         </>
