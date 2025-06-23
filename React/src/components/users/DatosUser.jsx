@@ -114,6 +114,7 @@ const DatosUser = ({ id }) => {
                     </>
                 }
             </div>
+            
         </div>
     )
 }

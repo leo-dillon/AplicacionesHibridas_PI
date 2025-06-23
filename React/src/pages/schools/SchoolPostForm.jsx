@@ -1,9 +1,12 @@
-import  { useState  } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import  { useState, useEffect   } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
 const SchoolPostForm = ()=>{
   const [useLoading, setUseLoading] = useState(false)
-  
+   const navigate = useNavigate();
  const [schools, setschools] = useState({
        user_id:'',
        name:'',
@@ -21,7 +24,6 @@ const SchoolPostForm = ()=>{
 const validateForm = () => {
   const newErrors = {};
 
-  if (!schools.user_id) newErrors.user_id = 'El ID del usuario es obligatorio.';
   if (!schools.name.trim()) newErrors.name = 'El nombre de la escuela es obligatorio.';
   if (!schools.CUE.trim()) newErrors.CUE = 'El CUE es obligatorio.';
   if (!schools.address.trim()) newErrors.address = 'La dirección es obligatoria.';
@@ -37,7 +39,19 @@ const validateForm = () => {
   setErrors(newErrors);
   return Object.keys(newErrors).length === 0;
 };
-
+useEffect(() => {
+  const token = localStorage.getItem("jwt");
+  if (token) {
+    const decoded = jwtDecode(token);
+    const userId = decoded?.id || decoded?.user_id;
+    if (userId) {
+      setschools((prev) => ({
+        ...prev,
+        user_id: userId
+      }));
+    }
+  }
+}, []);
    const handleSubmit = async (e) => {
   e.preventDefault();
   if (!validateForm()) return;
@@ -56,6 +70,7 @@ const validateForm = () => {
       const errorText = await response.text();// Intentar leer el cuerpo
       alert(errorText)
     }
+    navigate('/');
   } catch (error) {
     console.error('Error al crear escuela:', error);
     setUseLoading(false)
@@ -76,20 +91,7 @@ const validateForm = () => {
     <h2 className="text-2xl font-bold text-center">Formulario de Escuela</h2>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">ID del usuario</label>
-        <input
-        name="user_id"
-        type="text"
-        placeholder="ID de Usuario"
-        value={schools.user_id}
-        onChange={handleChange}
-        className="input"
-        
-      />
-      {errors.user_id && <p className="text-red-500 text-sm mt-1">{errors.user_id}</p>}
-
-      </div>
+      
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
         <input

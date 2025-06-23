@@ -65,7 +65,6 @@ export default function LastPayment() {
 
     const schoolId = decoded['School'];
    
-   console.log(schoolId);
    
     //  Hacer fetch al backend 
     fetch(`${DynamicUrl}/payment/issuedToPaid/${schoolId}`)
