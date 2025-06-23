@@ -6,6 +6,7 @@ const UserPostFormEdit = () => {
 
   const {id}= useParams();
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
   const [users, setUsers] = useState({
     
@@ -50,9 +51,36 @@ const UserPostFormEdit = () => {
     .then(data => setSchools(data))  // guardás directo el arreglo de escuelas
     .catch(error => console.error('Error al cargar escuelas:', error));
 }, []);
+const validate = () =>{
+    const newErrors = {};
+    if (!users.firstName) newErrors.firstName = 'El nombre es obligatorio';
+    if (!users.lastName) newErrors.lastName = 'El apellido es obligatorio';
+    if (!users.address) newErrors.address = 'La dirección es obligatoria';
+    if (!users.gender) newErrors.gender = 'El género es obligatorio';
 
+    if (!users.birthDate) newErrors.birthDate = 'La fecha de nacimiento es obligatoria';
+    else if (new Date(users.birthDate) > new Date()) newErrors.birthDate = 'La fecha no es valida';
+if (!users.dni) newErrors.dni = 'El DNI es obligatorio';
+    else if (!/^\d{7,}$/.test(users.dni)) newErrors.dni = 'El DNI debe tener al menos 7 números';
+
+    if (!users.email) newErrors.email = 'El email es obligatorio';
+    else if (!/\S+@\S+\.\S+/.test(users.email)) newErrors.email = 'El email no es válido';
+
+    if (!users.password) newErrors.password = 'La contraseña es obligatoria';
+    else if (users.password.length < 4) newErrors.password = 'Debe tener al menos 4 caracteres';
+
+    if (users.phone && !/^\+?\d{7,15}$/.test(users.phone)) newErrors.phone = 'Teléfono no válido';
+
+    if (!users.role) newErrors.role = 'El rol es obligatorio';
+
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
    const handleSubmit = (e) => {
     e.preventDefault();
+        if (!validate()) return;
+
     fetch(`${DynamicUrl}/users/${id}`, {
       method: 'PUT',
       headers: {
@@ -85,32 +113,73 @@ const handleChange = (e) => {
       <h2 className="text-2xl font-bold text-center">Formulario de editar Usuario</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+        <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+        <input name="firstName" type="text" placeholder="Nombre" value={users.firstName} onChange={handleChange} className="input"  />
+        {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
 
-        <input name="firstName" type="text" placeholder="Nombre" value={users.firstName} onChange={handleChange} className="input" required />
-        <input name="lastName" type="text" placeholder="Apellido" value={users.lastName} onChange={handleChange} className="input" required />
-
-        <select name="gender" value={users.gender} onChange={handleChange} className="input" required>
+          <input name="lastName" type="text" placeholder="Apellido" value={users.lastName} onChange={handleChange} className="input"  />
+{errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+        </div>
+        <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Genero</label>
+           <select name="gender" value={users.gender} onChange={handleChange} className="input" >
           <option value="Male">Masculino</option>
           <option value="Female">Femenino</option>
           <option value="Other">Otro</option>
         </select>
+        {errors.gender && <p className="text-red-500 text-sm mt-1">{errors.gender}</p>}
+        </div>
+        <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de nacimiento</label>
+         <input name="birthDate" type="date" value={users.birthDate} onChange={handleChange} className="input"  />
+         {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
+        </div>
+        
+        <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">DNI</label>
+         <input name="dni" type="text" placeholder="DNI" value={users.dni} onChange={handleChange} className="input"  /> 
+         {errors.dni && <p className="text-red-500 text-sm mt-1">{errors.dni}</p>}
+        </div>
+        <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <input name="email" type="email" placeholder="Email" value={users.email} onChange={handleChange} className="input"  />
+        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Direccion</label>
+          <input name="address" type="text" placeholder="Dirección" value={users.address} onChange={handleChange} className="input"  />
+          {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Telefono</label>
+          <input name="phone" type="tel" placeholder="Teléfono" value={users.phone} onChange={handleChange} className="input"  />
+          {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+          <input name="password" type="password" placeholder="Contraseña" value={users.password} onChange={handleChange} className="input"  />
+          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+        </div>
 
-        <input name="birthDate" type="date" value={users.birthDate} onChange={handleChange} className="input" required />
-
-        <input name="dni" type="text" placeholder="DNI" value={users.dni} onChange={handleChange} className="input" required />
-        <input name="email" type="email" placeholder="Email" value={users.email} onChange={handleChange} className="input" required />
-
-        <input name="address" type="text" placeholder="Dirección" value={users.address} onChange={handleChange} className="input" required />
-        <input name="phone" type="tel" placeholder="Teléfono" value={users.phone} onChange={handleChange} className="input" required />
-
-        <input name="password" type="password" placeholder="Contraseña" value={users.password} onChange={handleChange} className="input" required />
-        <select name="role" value={users.role} onChange={handleChange} className="input" required>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+          <select name="role" value={users.role} onChange={handleChange} className="input" >
           <option value="student">Estudiante</option>
           <option value="parent">Padre</option>
           <option value="teacher">Profesor</option>
           <option value="director">director</option>
         </select>
-         <select
+        {errors.role && <p className="text-red-500 text-sm mt-1">{errors.role}</p>}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Escuela</label>
+          
+          <select
             name="school_id"
             value={users.school_id}
             onChange={handleChange}
@@ -123,10 +192,9 @@ const handleChange = (e) => {
               </option>
             ))}
           </select>
+          </div>
+         
       </div>
-
-      
-
       <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
         Enviar
       </button>

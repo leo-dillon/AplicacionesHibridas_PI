@@ -3,6 +3,7 @@ const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
 const SchoolPostForm = ()=>{
   const [useLoading, setUseLoading] = useState(false)
+  
  const [schools, setschools] = useState({
        user_id:'',
        name:'',
@@ -16,9 +17,30 @@ const SchoolPostForm = ()=>{
        level:'',
        type: ''
     })
+    const [errors, setErrors] = useState({});
+const validateForm = () => {
+  const newErrors = {};
+
+  if (!schools.user_id) newErrors.user_id = 'El ID del usuario es obligatorio.';
+  if (!schools.name.trim()) newErrors.name = 'El nombre de la escuela es obligatorio.';
+  if (!schools.CUE.trim()) newErrors.CUE = 'El CUE es obligatorio.';
+  if (!schools.address.trim()) newErrors.address = 'La dirección es obligatoria.';
+  if (!schools.city.trim()) newErrors.city = 'La ciudad es obligatoria.';
+  if (!schools.province.trim()) newErrors.province = 'La provincia es obligatoria.';
+  if (!schools.phones.trim()) newErrors.phones = 'El teléfono es obligatorio.';
+  if (schools.Emails && !schools.Emails.split(',').every(email => /\S+@\S+\.\S+/.test(email.trim()))) {
+    newErrors.Emails = 'Uno o más correos electrónicos no son válidos.';
+  }
+  if (!schools.level) newErrors.level = 'Seleccioná un nivel educativo.';
+  if (!schools.type) newErrors.type = 'Seleccioná un tipo de gestión.';
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
    const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log(schools);
+  if (!validateForm()) return;
   setUseLoading(true)
 
   try {
@@ -54,77 +76,108 @@ const SchoolPostForm = ()=>{
     <h2 className="text-2xl font-bold text-center">Formulario de Escuela</h2>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <input
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">ID del usuario</label>
+        <input
         name="user_id"
         type="text"
         placeholder="ID de Usuario"
         value={schools.user_id}
         onChange={handleChange}
         className="input"
-        required
+        
       />
+      {errors.user_id && <p className="text-red-500 text-sm mt-1">{errors.user_id}</p>}
 
-      <input
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+        <input
         name="name"
         type="text"
         placeholder="Nombre de la escuela"
         value={schools.name}
         onChange={handleChange}
         className="input"
-        required
+        
       />
+      {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
 
-      <input
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Identifiacador educativo</label>
+        <input
         name="CUE"
         type="text"
         placeholder="CUE"
         value={schools.CUE}
         onChange={handleChange}
         className="input"
-        required
+        
       />
-<input
+            {errors.CUE && <p className="text-red-500 text-sm mt-1">{errors.CUE}</p>}
+
+      </div>
+      <div>
+       <label className="block text-sm font-medium text-gray-700 mb-1">Telefono educativo</label>
+
+        <input
         name="phones"
         type="text"
         placeholder="Teléfonos (separados por coma)"
         value={schools.phones}
         onChange={handleChange}
         className="input"
-        required
+        
       />
-      <input
+      {errors.phones && <p className="text-red-500 text-sm mt-1">{errors.phones}</p>}
+
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Direccion</label>
+        <input
         name="address"
         type="text"
         placeholder="Dirección"
         value={schools.address}
         onChange={handleChange}
         className="input"
-        required
+        
       />
+      {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
 
-      <input
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
+        <input
         name="city"
         type="text"
         placeholder="Ciudad"
         value={schools.city}
         onChange={handleChange}
         className="input"
-        required
+        
       />
+      {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
 
-      <input
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Provincia</label>
+        <input
         name="province"
         type="text"
         placeholder="Provincia"
         value={schools.province}
         onChange={handleChange}
         className="input"
-        required
+        
       />
+      {errors.province && <p className="text-red-500 text-sm mt-1">{errors.province}</p>}
 
-      
-
-      <input
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Emails</label>
+        <input
         name="Emails"
         type="text"
         placeholder="Emails (separados por coma)"
@@ -132,13 +185,17 @@ const SchoolPostForm = ()=>{
         onChange={handleChange}
         className="input"
       />
+      {errors.Emails && <p className="text-red-500 text-sm mt-1">{errors.Emails}</p>}
 
-      <select
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Nivel academico</label>
+        <select
         name="level"
         value={schools.level}
         onChange={handleChange}
         className="input"
-        required
+        
       >
         <option value="">Nivel</option>
         <option value="Inicial">Inicial</option>
@@ -146,13 +203,17 @@ const SchoolPostForm = ()=>{
         <option value="Secundario">Secundario</option>
         <option value="Terciario">Terciario</option>
       </select>
+            {errors.level && <p className="text-red-500 text-sm mt-1">{errors.level}</p>}
 
-      <select
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de gestion</label>
+        <select
         name="type"
         value={schools.type}
         onChange={handleChange}
         className="input"
-        required
+        
       >
         <option value="">Tipo de institución</option>
         <option value="Pública">Pública</option>
@@ -160,6 +221,28 @@ const SchoolPostForm = ()=>{
         <option value="Subencionada">Subencionada</option>
 
       </select>
+      {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type}</p>}
+
+      </div>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
     </div>
 
     <button

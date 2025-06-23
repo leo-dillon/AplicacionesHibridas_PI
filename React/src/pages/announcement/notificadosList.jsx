@@ -55,7 +55,7 @@ const AnnouncementList = () => {
   
   return (
     <div>
-      <div className="flex justify-between items-center mb-4 mx-4">
+      <div className="flex justify-between items-center my-4 mx-4">
   <h1 className="text-2xl font-bold">Lista de Comunicados</h1>
   {isDirector && (
     <Link
