@@ -36,7 +36,7 @@ const DatosSchool = ({ id, role }) => {
       role === "director" ? (
         <div className="bg-yellow-100 border-l-4 flex justify-center border-yellow-500 text-yellow-800 p-4 rounded-md shadow-sm">
           <div className="text-base font-medium inline-flex items-center gap-2">
-            <p className="m-0">No tienes ninguna institución asociada. Podés crear una:</p>
+            <p className="m-0">No tienes ninguna institución asociada.</p>
             <Link to="/Crear_Escuela" className="text-blue-600 hover:text-blue-800 underline">
               Crear una
             </Link>

@@ -65,11 +65,19 @@ useEffect(() => {
       },
       body: JSON.stringify(schools),
     });
+    
     setUseLoading(false)
-    if (!response.ok) {
-      const errorText = await response.text();// Intentar leer el cuerpo
-      alert(errorText)
-    }
+    const data = await response.json(); 
+    const newSchoolId = data.id || data._id;
+    const token = localStorage.getItem("jwt");
+    const decoded = jwtDecode(token);
+    const userId = decoded?.id || decoded?.user_id;
+     await fetch(`${DynamicUrl}/users/${userId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ school_id: newSchoolId }),
+    });
+     
     navigate('/');
   } catch (error) {
     console.error('Error al crear escuela:', error);
