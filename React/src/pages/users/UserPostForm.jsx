@@ -73,18 +73,18 @@ const handleChange = (e) => {
 
   return (
     
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-  <div className="w-full max-w-4xl bg-white p-8 rounded-2xl shadow-lg space-y-6">
-    <div className="text-center">
+    <div className="flex items-center justify-center bg-gradient-to-br from-gray-100 to-blue-100 p-4">
+  <div className="flex flex-col items-center w-full max-w-4xl bg-white p-8 my-12 rounded-2xl shadow-lg space-y-6">
+    <div className="flex flex-col justify-center">
       <img
-        src="/li.svg"
-        alt="Registro"
-        className="mx-auto w-24 h-24 rounded-full object-cover mb-4"
+        src="/public/logo.png"
+        alt="Logo Login"
+        className="w-32 h-32 rounded-3xl shadow-md border border-gray-200"
       />
-      <h1 className="text-3xl font-bold text-gray-800">Registrarse</h1>
+      <h2 className="text-3xl font-bold text-gray-800">Registrarse</h2>
     </div>
 
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
@@ -93,9 +93,10 @@ const handleChange = (e) => {
             type="text"
             value={users.firstName}
             onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+            className={`bg-gray-50 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
                     errors.firstName ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
                   }`}
+            placeholder='Leonardo'
                 />
                 {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
         </div>
@@ -107,9 +108,10 @@ const handleChange = (e) => {
             type="text"
             value={users.lastName}
             onChange={handleChange}
-           className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+           className={`bg-gray-50 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
                     errors.lastName ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
                   }`}
+          placeholder='Dillon'
                 />
                 {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
         </div>
@@ -120,7 +122,7 @@ const handleChange = (e) => {
                 name="gender"
                 value={users.gender}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                className={`bg-gray-50 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
                   errors.gender ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
                 }`}
               >
@@ -155,6 +157,7 @@ const handleChange = (e) => {
             type="text"
             value={users.dni}
             onChange={handleChange}
+            placeholder='45781245'
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
                     errors.dni ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
                   }`}
@@ -171,6 +174,7 @@ const handleChange = (e) => {
             type="email"
             value={users.email}
             onChange={handleChange}
+            placeholder='mailEjemplo@gmail.com'
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
                     errors.email ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
                   }`}
@@ -185,6 +189,7 @@ const handleChange = (e) => {
             name="address"
             type="text"
             value={users.address}
+            placeholder='Una Dirección valida'
             onChange={handleChange}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
                     errors.address ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
@@ -202,6 +207,7 @@ const handleChange = (e) => {
             type="tel"
             value={users.phone}
             onChange={handleChange}
+            placeholder='1245365874'
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
                     errors.phone ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
                   }`}
@@ -217,6 +223,7 @@ const handleChange = (e) => {
             name="password"
             type="password"
             value={users.password}
+            placeholder='***********'
             onChange={handleChange}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
                     errors.password ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
