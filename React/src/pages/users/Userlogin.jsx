@@ -68,8 +68,6 @@ const Userlogin = () => {
   return (
    <div className="flex items-center justify-center bg-gradient-to-br from-gray-100 to-blue-100 p-4">
   <div className="w-full max-w-md bg-white rounded-2xl shadow-lg px-3 py-8 space-y-6">
-    
-    {/* Logo */}
     <div className="flex justify-center">
       <img
         src="/public/logo.png"
@@ -77,13 +75,8 @@ const Userlogin = () => {
         className="w-32 h-32 rounded-3xl shadow-md border border-gray-200"
       />
     </div>
-
-    {/* Título */}
     <h1 className="text-3xl font-bold text-gray-800 text-center">Iniciar sesión</h1>
-
-    {/* Formulario */}
     <form onSubmit={handleSubmit} className="space-y-5">
-      {/* Email */}
       <div>
         <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-1">
           Correo electrónico
@@ -102,8 +95,6 @@ const Userlogin = () => {
         />
         {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
       </div>
-
-      {/* Contraseña */}
       <div>
         <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-1">
           Contraseña
@@ -122,8 +113,6 @@ const Userlogin = () => {
         />
         {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
       </div>
-
-      {/* Botón */}
       <button
         type="submit"
         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition"
@@ -131,8 +120,6 @@ const Userlogin = () => {
         Ingresar
       </button>
     </form>
-
-    {/* Link de registro */}
     <p className="text-sm text-center text-gray-600">
       ¿No tienes cuenta?{' '}
       <a href="/Crear_Usuario" className="text-blue-600 font-medium hover:underline">
