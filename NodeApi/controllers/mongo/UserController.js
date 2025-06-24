@@ -133,10 +133,9 @@ export class UserController {
 
 	static async editUserById(req, res) {
 		try {
+			console.log("Cuerpo recibido en PUT /users/:id:", req.body); 
 			const updates = { ...req.body };
 
-			// Si se incluye una nueva contraseña, hashearla
-			
 			if (updates.password) {
 				if (updates.password.trim() !== '') {
 					updates.password = await bcrypt.hash(updates.password, salt);
@@ -147,14 +146,26 @@ export class UserController {
 			if( !(updates.school_id) ){
 				updates.school_id = null
 			} 
-			const user = await UserModel.findByIdAndUpdate(req.params.id, updates, {
-			new: true,
-			});
+			await UserModel.findByIdAndUpdate(req.params.id, updates);
+
+			 const userUpdated = await UserModel.findById(req.params.id);
+			if (!userUpdated) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+           //NUEVO JWT CON ESCUELA ACTUALIZADA
+			const data  = {
+			id: userUpdated._id,
+			email: userUpdated.email,
+			role: userUpdated.role,
+			School: userUpdated.school_id,
+		};
+		const token = jsonWebToken.sign(data , SECRET_KEY, { expiresIn: '1h' });
 			res.status(200).json({
 				message: "Usuario actualizado correctamente",
-				data: updates,
+				jwt: token,
 			});
 		} catch (error) {
+			console.error("Error en editUserById:", error);
 			res.status(400).json({ 
 				error: error.message,
 				data: updates

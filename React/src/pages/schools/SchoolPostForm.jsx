@@ -72,12 +72,24 @@ useEffect(() => {
     const token = localStorage.getItem("jwt");
     const decoded = jwtDecode(token);
     const userId = decoded?.id || decoded?.user_id;
-     await fetch(`${DynamicUrl}/users/${userId}`, {
+    console.log("Actualizando usuario", userId, "con school_id", newSchoolId);
+
+    const responseUser = await fetch(`${DynamicUrl}/users/${userId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ school_id: newSchoolId }),
+      body: JSON.stringify({ school_id: newSchoolId })
     });
-     
+     const userData = await responseUser.json();
+     if (userData.jwt) {
+     localStorage.setItem("jwt", userData.jwt);
+     console.log(userData.jwt)
+}
+if (userData.jwt) {
+  localStorage.setItem("jwt", userData.jwt);
+  console.log("Nuevo JWT guardado:", jwtDecode(userData.jwt));
+} else {
+  console.log("No se devolvió un nuevo JWT");
+}
     navigate('/');
   } catch (error) {
     console.error('Error al crear escuela:', error);
