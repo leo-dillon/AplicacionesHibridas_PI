@@ -6,7 +6,7 @@ import HomeLogged from "../components/home/HomeLogged"
 function  Home() {
   const { userData } = useContext(AuthContext)
   return (
-    <div className="w-full max-w-8/10 mx-auto p-4">
+    <div className="w-full max-w-8/10 mx-auto">
       {
         ( userData )
           ? <HomeLogged />
