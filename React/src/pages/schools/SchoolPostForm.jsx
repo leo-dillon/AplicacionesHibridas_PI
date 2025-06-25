@@ -90,7 +90,7 @@ if (userData.jwt) {
 } else {
   console.log("No se devolvió un nuevo JWT");
 }
-    navigate('/');
+    navigate('/Realizar_Pago');
   } catch (error) {
     console.error('Error al crear escuela:', error);
     setUseLoading(false)

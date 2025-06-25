@@ -152,7 +152,6 @@ export class UserController {
 			if (!userUpdated) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-           //NUEVO JWT CON ESCUELA ACTUALIZADA
 			const data  = {
 			id: userUpdated._id,
 			email: userUpdated.email,

@@ -84,7 +84,7 @@ static async getPaymentidPaid(req, res) {
       status: 'pending'
     });
     if (exist) {
-      return res.status(400).json({
+      return res.status(409).json({
         message: 'Ya generaste una solicitud de pago. Debe ser abonada primero.'
       });
     }

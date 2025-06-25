@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
-
+import { useNavigate } from 'react-router-dom'
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
 const CreatePaymentForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     concept: '',
     pack: '',
@@ -85,6 +86,9 @@ const CreatePaymentForm = () => {
       if (!response.ok) throw new Error(result.message || 'Error al crear el pago');
 
       setMessage(result.message);
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
     } catch (error) {
       setMessage(error.message);
     }

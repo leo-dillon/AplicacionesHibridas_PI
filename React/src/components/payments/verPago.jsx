@@ -5,7 +5,14 @@ import { Link } from "react-router-dom"
 
 // Componente para mostrar fecha de vencimiento con aviso 
 function DueDate({ dueDate }) {
-  if (!dueDate) return null;
+  if (!dueDate) {
+  return (
+    <p className="text-yellow-600 font-semibold">
+      ⏳ Licencia pendiente de activación
+    </p>
+  );
+}
+
 
   const due = new Date(dueDate);
   const now = new Date();
@@ -85,7 +92,8 @@ export default function LastPayment() {
 
   return (
     <div>
-      <h3 className="text-lg font-bold mb-2">Último pago de la escuela</h3>
+      <h3 className="text-lg font-bold mb-2">Último pago de la escuela:</h3>
+      
       <DueDate dueDate={dueDate}/>
     </div>
   );
