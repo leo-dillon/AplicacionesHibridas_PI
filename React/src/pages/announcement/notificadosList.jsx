@@ -16,7 +16,7 @@ const AnnouncementList = () => {
      const token = localStorage.getItem('jwt');
      const decoded = jwtDecode(token);
      const role = decoded['role']
-      if (role === 'director') {
+      if (role === 'director' || role === 'teacher') {
       setIsDirector(true);
     }
     
