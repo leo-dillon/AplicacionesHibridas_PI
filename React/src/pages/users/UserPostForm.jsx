@@ -75,7 +75,7 @@ const handleChange = (e) => {
     
     <div className="flex items-center justify-center bg-gradient-to-br from-gray-100 to-blue-100 p-4">
   <div className="flex flex-col items-center w-full max-w-4xl bg-white p-8 my-12 rounded-2xl shadow-lg space-y-6">
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center items-center">
       <img
         src="/public/logo.png"
         alt="Logo Login"
@@ -94,7 +94,7 @@ const handleChange = (e) => {
             value={users.firstName}
             onChange={handleChange}
             className={`bg-gray-50 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.firstName ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                    errors.firstName ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                   }`}
             placeholder='Leonardo'
                 />
@@ -109,7 +109,7 @@ const handleChange = (e) => {
             value={users.lastName}
             onChange={handleChange}
            className={`bg-gray-50 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.lastName ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                    errors.lastName ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                   }`}
           placeholder='Dillon'
                 />
@@ -123,7 +123,7 @@ const handleChange = (e) => {
                 value={users.gender}
                 onChange={handleChange}
                 className={`bg-gray-50 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                  errors.gender ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  errors.gender ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                 }`}
               >
                 <option value="">Seleccionar género</option>
@@ -142,7 +142,7 @@ const handleChange = (e) => {
             value={users.birthDate}
             onChange={handleChange}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                    errors.birthDate ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                    errors.birthDate ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                   }`}
             
           />
@@ -159,7 +159,7 @@ const handleChange = (e) => {
             onChange={handleChange}
             placeholder='45781245'
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                    errors.dni ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                    errors.dni ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                   }`}
             
           />
@@ -176,7 +176,7 @@ const handleChange = (e) => {
             onChange={handleChange}
             placeholder='mailEjemplo@gmail.com'
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                    errors.email ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                    errors.email ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                   }`}
           />
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -192,7 +192,7 @@ const handleChange = (e) => {
             placeholder='Una Dirección valida'
             onChange={handleChange}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                    errors.address ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                    errors.address ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                   }`}
             
           />
@@ -209,7 +209,7 @@ const handleChange = (e) => {
             onChange={handleChange}
             placeholder='1245365874'
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                    errors.phone ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                    errors.phone ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                   }`}
             
           />
@@ -226,7 +226,7 @@ const handleChange = (e) => {
             placeholder='***********'
             onChange={handleChange}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                    errors.password ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                    errors.password ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                   }`}
             
           />
@@ -241,7 +241,7 @@ const handleChange = (e) => {
             value={users.role}
             onChange={handleChange}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                  errors.role ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                  errors.role ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500 border-gray-300'
                 }`}
             
           >
