@@ -1,29 +1,3 @@
-// import express from 'express'
-// import routerApi from './routes/index.js'
-// import dotenv from 'dotenv'
-// import { connectMongoose } from './config/mongoDB.js'
-// import swaggerUi from 'swagger-ui-express' // librería para documentar API
-// import specs from "./swagger/swagger.js"
-
-
-// dotenv.config()
-// const app = express()
-// const PORT = process.env.PORT
-// connectMongoose()
-
-// app.use(express.json())
-// app.use(express.static('public'))
-// app.use( '/api-docs' , swaggerUi.serve, swaggerUi.setup(specs))
-
-// app.get('/',(request,response)=>{
-//     response.send('Home')
-// })
-
-// routerApi(app)
-
-// app.listen(PORT, () => {
-//     console.log(`El servidor correra en http://localhost:${PORT}`)
-// })
 
 import express from 'express'
 import cors from 'cors'
@@ -48,7 +22,7 @@ app.use(cors())
 // Middleware
 app.use(express.json())
 app.use(express.static('public'))
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Servir Swagger UI desde node_modules
 app.use('/swagger-ui', express.static(getAbsoluteFSPath()))
 
@@ -69,3 +43,4 @@ routerApi(app)
 app.listen(PORT, () => {
   console.log(`El servidor correrá en http://localhost:${PORT}`)
 })
+

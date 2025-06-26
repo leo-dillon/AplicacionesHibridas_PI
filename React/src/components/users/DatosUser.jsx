@@ -56,21 +56,27 @@ const DatosUser = ({ id }) => {
                     ? <p className="w-full text-center text-xl text-gray-600"> cargando los datos del usuario</p>
                     :
                     <>
-                        <div className="flex justify-center items-center w-full max-w-3/10">
-                            {
-                                ( user?.photo && imgError ) 
-                                ?   <picture className="w-full max-w-8/10 flex justify-center items-center border-4 border-gray-200 rounded-full">
-                                        <img 
-                                            src={ user?.photo } 
-                                            alt={ "Foto de perfil de " + user?.firstName + ' ' + user?.lastName } 
-                                            onError={ setImgError( false ) }
-                                        />
-                                    </picture>
-                                :   <div className="w-full max-w-8/10 flex justify-center items-center border-4 border-gray-200 rounded-full"> 
-                                            <User /> 
-                                    </div> 
-                            }
-                        </div>
+                        <div className="flex justify-center items-center w-full md:w-3/12">
+  {
+    (user?.file && imgError)
+      ? (
+        <picture className="w-4/5 aspect-square flex justify-center items-center border-4 border-gray-200 rounded-full overflow-hidden">
+          <img
+            src={`${DynamicUrl}/uploads/${user.file}`}
+            alt={`Foto de perfil de ${user.firstName} ${user.lastName}`}
+            onError={() => setImgError(false)}
+            className="w-full h-full object-cover"
+          />
+        </picture>
+      )
+      : (
+        <div className="w-4/5 aspect-square flex justify-center items-center border-4 border-gray-200 rounded-full bg-gray-100">
+          <User className="w-1/2 h-1/2 text-gray-400" />
+        </div>
+      )
+  }
+</div>
+
                         <div className="relative w-full max-w-7/10 p-4 border border-gray-200 rounded-2xl">
                             <h3 className="font-semibold text-gray-800"> Datos personales </h3>
                             <div className="grid grid-cols-2 gap-y-4 p-2">

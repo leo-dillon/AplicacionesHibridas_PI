@@ -133,16 +133,12 @@ export class UserController {
 
 	static async editUserById(req, res) {
 		try {
-			console.log("Cuerpo recibido en PUT /users/:id:", req.body); 
 			const updates = { ...req.body };
+              console.log({File: req.file});
+			  if (req.file) {
+              updates.file = req.file.filename; 
+               }
 
-			if (updates.password) {
-				if (updates.password.trim() !== '') {
-					updates.password = await bcrypt.hash(updates.password, salt);
-				} else {
-					delete updates.password; // No se actualiza si está vacío
-				}
-			}
 			if( !(updates.school_id) ){
 				updates.school_id = null
 			} 

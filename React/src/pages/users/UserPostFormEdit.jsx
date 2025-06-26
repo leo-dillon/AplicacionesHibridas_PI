@@ -18,7 +18,7 @@ const UserPostFormEdit = () => {
     email:'',
     address:'',
     phone:'',
-    password:'',
+    
     active: true,
     role: '',
     school_id: '',
@@ -66,9 +66,6 @@ if (!users.dni) newErrors.dni = 'El DNI es obligatorio';
     if (!users.email) newErrors.email = 'El email es obligatorio';
     else if (!/\S+@\S+\.\S+/.test(users.email)) newErrors.email = 'El email no es válido';
 
-    if (!users.password) newErrors.password = 'La contraseña es obligatoria';
-    else if (users.password.length < 4) newErrors.password = 'Debe tener al menos 4 caracteres';
-
     if (users.phone && !/^\+?\d{7,15}$/.test(users.phone)) newErrors.phone = 'Teléfono no válido';
 
     if (!users.role) newErrors.role = 'El rol es obligatorio';
@@ -80,13 +77,19 @@ if (!users.dni) newErrors.dni = 'El DNI es obligatorio';
    const handleSubmit = (e) => {
     e.preventDefault();
         if (!validate()) return;
-
+    const formData = new FormData();
+    // Agregamos todos los campos menos file
+    Object.entries(users).forEach(([key, value]) => {
+    if (key !== 'file' && value !== undefined) {
+      formData.append(key, value);
+    }
+  });
+   if (users.file) {
+    formData.append('file', users.file);
+  }
     fetch(`${DynamicUrl}/users/${id}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(users), 
+      body: formData,
     })
     .then(() => {
       navigate('/Lista_Usuarios'); 
@@ -107,11 +110,33 @@ const handleChange = (e) => {
 
   return (
     <div className="user-container bg-gray-100 py-4">
-            <h1>Formulario de editar Usuario</h1>
+            
 
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4" >
-      <h2 className="text-2xl font-bold text-center">Formulario de editar Usuario</h2>
+      <h2 className="text-2xl font-bold text-center"> Editar Usuario</h2>
+  <div className="flex flex-col items-center gap-4 mb-6">
+  <div className="text-center">
+    <p className="text-sm font-semibold text-gray-600 mb-2">Foto actual:</p>
+    {users.file && (
+      <img
+        src={`${DynamicUrl}/uploads/${users.file}`}
+        alt="Foto del usuario"
+        className="w-32 h-32 rounded-full object-cover shadow border"
+      />
+    )}
+  </div>
 
+  <div className="w-full max-w-sm text-center">
+    <label className="block text-sm font-medium text-gray-700 mb-2">Subir nueva foto</label>
+    <input
+      type="file"
+      name="file"
+      accept="image/*"
+      onChange={e => setUsers(prev => ({ ...prev, file: e.target.files[0] }))}
+      className="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+    />
+  </div>
+</div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
         <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
@@ -149,7 +174,7 @@ const handleChange = (e) => {
         <input name="email" type="email" placeholder="Email" value={users.email} onChange={handleChange} className="input"  />
         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Direccion</label>
           <input name="address" type="text" placeholder="Dirección" value={users.address} onChange={handleChange} className="input"  />
@@ -160,12 +185,7 @@ const handleChange = (e) => {
           <input name="phone" type="tel" placeholder="Teléfono" value={users.phone} onChange={handleChange} className="input"  />
           {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-          <input name="password" type="password" placeholder="Contraseña" value={users.password} onChange={handleChange} className="input"  />
-          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
-        </div>
-
+       
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
           <select name="role" value={users.role} onChange={handleChange} className="input" >
@@ -193,8 +213,12 @@ const handleChange = (e) => {
             ))}
           </select>
           </div>
+          
+  
+
+</div>
          
-      </div>
+     
       <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
         Enviar
       </button>

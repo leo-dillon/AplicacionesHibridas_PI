@@ -1,9 +1,20 @@
-import express from 'express'
+import express, { request } from 'express'
+import multer from 'multer';
+import { UserController } from '../controllers/mongo/UserController.js';
+import { uploaderController } from '../controllers/mongo/uploadController.js';
 
-// import { UserController } from '../controllers/userController.js'
-import { UserController } from '../controllers/mongo/UserController.js'
- 
 const routerUser = express.Router()
+
+const storage = multer.diskStorage({
+    destination:(req, file, cb)=>{
+        cb(null, 'uploads/')
+    },
+    filename:(req, file, cb) =>{
+        cb(null, Date.now()+ '-' + file.originalname);
+    }
+})
+const upload = multer({storage:storage})
+
 
 /**
  * @swagger
@@ -110,6 +121,7 @@ const routerUser = express.Router()
  *                 $ref: '#/components/schemas/User'
  */
 routerUser.get("/", UserController.getUsers)
+routerUser.post("/upload", upload.single('file'), uploaderController)
 
 /**
  * @swagger
@@ -329,7 +341,7 @@ routerUser.post("/auth", UserController.auth)
  *       500:
  *         description: Server Error
  */
-routerUser.put("/:id", UserController.editUserById)
+routerUser.put("/:id", upload.single('file'), UserController.editUserById)
 
 /**
  * @swagger
@@ -351,5 +363,7 @@ routerUser.put("/:id", UserController.editUserById)
  *         description: Not found user
  */
 routerUser.delete("/:id", UserController.deleteUserById)
+
+
 
 export default routerUser
