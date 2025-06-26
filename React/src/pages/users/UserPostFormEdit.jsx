@@ -121,7 +121,7 @@ const handleChange = (e) => {
       <img
         src={`${DynamicUrl}/uploads/${users.file}`}
         alt="Foto del usuario"
-        className="w-32 h-32 rounded-full object-cover shadow border"
+        className="w-32 h-32 rounded-full shadow border"
       />
     )}
   </div>

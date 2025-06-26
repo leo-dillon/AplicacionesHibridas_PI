@@ -65,7 +65,7 @@ const DatosUser = ({ id }) => {
             src={`${DynamicUrl}/uploads/${user.file}`}
             alt={`Foto de perfil de ${user.firstName} ${user.lastName}`}
             onError={() => setImgError(false)}
-            className="w-full h-full object-cover"
+            
           />
         </picture>
       )
