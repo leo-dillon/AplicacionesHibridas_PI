@@ -3,6 +3,8 @@ import { UserModel } from '../../models/mongo/UserModel.js'
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jsonWebToken from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
 const salt = 10
 
 dotenv.config()
@@ -135,9 +137,15 @@ export class UserController {
 	static async editUserById(req, res) {
 		try {
 			const updates = { ...req.body };
-              console.log({File: req.file});
+              
+			  const userBefore = await UserModel.findById(req.params.id);
 			  if (req.file) {
               updates.file = req.file.filename; 
+			  const oldFilePath = path.join('uploads', userBefore.file || '');
+      if (userBefore.file && fs.existsSync(oldFilePath)) {
+        fs.unlinkSync(oldFilePath);
+        console.log("Foto anterior eliminada:", oldFilePath);
+      }
                }
 
 			if( !(updates.school_id) ){
