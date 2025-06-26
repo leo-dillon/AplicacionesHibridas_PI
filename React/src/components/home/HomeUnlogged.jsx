@@ -2,7 +2,7 @@ function HomeUnlogged(){
     return (
         <>
             <section className="mb-24">
-                <div className="flex justify-center items-center min-h-120 bg-[url(./public/fondoHome.avif)] bg-center rounded-b-4xl">
+                <div className="flex justify-center items-center min-h-120 bg-[url(./public/fondoHome.jpg)] bg-center rounded-b-4xl">
                     <h2 className="w-full bg-blue-200/90 p-12 text-4xl text-center text-gray-800 font-bold">
                         Sistema de Gestión y de comunicación academíca.
                     </h2>

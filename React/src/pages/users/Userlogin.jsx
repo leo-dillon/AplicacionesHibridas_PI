@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl;
 
@@ -115,16 +115,16 @@ const Userlogin = () => {
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition"
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition cursor-pointer"
       >
         Ingresar
       </button>
     </form>
     <p className="text-sm text-center text-gray-600">
-      ¿No tienes cuenta?{' '}
-      <a href="/Crear_Usuario" className="text-blue-600 font-medium hover:underline">
-        Registrate aquí
-      </a>
+      ¿No tienes cuenta? 
+      <Link to={"/Crear_Usuario"} className="text-blue-600 font-medium ml-2 hover:underline">
+          Registrate aquí
+      </Link>
     </p>
   </div>
 </div>
