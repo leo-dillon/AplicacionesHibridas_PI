@@ -48,7 +48,6 @@ const Userlogin = () => {
       }
 
       const result = await response.json();
-      console.log(result);
       login(result.jwt);
 
       navigate('/');

@@ -57,7 +57,7 @@ if (!users.dni) newErrors.dni = 'El DNI es obligatorio';
         },
         body: JSON.stringify(users), 
       });
-      
+      alert("Usuario registrado correctamente")
       navigate('/');
     } catch (error) {
       alert('Error al registrar usuario: ' + error.message);

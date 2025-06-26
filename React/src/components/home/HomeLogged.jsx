@@ -11,7 +11,7 @@ function HomeLogged(){
     
     return(
         <>
-            <main className="flex flex-col gap-12 overflow-y-auto">
+            <main className="flex flex-col gap-12 overflow-y-auto pt-4">
                 <DatosUser id = { id }/>
                 {
                     ( userData.role == 'Admin' )

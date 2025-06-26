@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom"
 
 const AdminRoutes = ({ children }) => {
     const { userData } = useContext(AuthContext)
-    if( userData.role != "Admin" ){
+    if( userData?.role != "Admin" ){
         return <Navigate to="/" replace/>
     }
     return children

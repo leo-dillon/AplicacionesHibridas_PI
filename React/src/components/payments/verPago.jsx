@@ -13,7 +13,7 @@ function DueDate({ dueDate }) {
   );
 }
 
-
+  
   const due = new Date(dueDate);
   const now = new Date();
   const diffTime = due - now;
@@ -64,7 +64,6 @@ function DueDate({ dueDate }) {
 
 export default function LastPayment() {
   const [dueDate, setDueDate] = useState(null);
-
   useEffect(() => {
 
     const token = localStorage.getItem('jwt');

@@ -19,6 +19,9 @@ import Home from '../pages/Home';
 import Header from './header/Header';
 import '../index.css';
 import AdminRoutes from './protectedRoutes/AdminRutes';
+import UnLoggedRoutes from './protectedRoutes/UnloggedRutes';
+import LoggedRoutes from './protectedRoutes/LoggedRutes';
+import DirectorRoutes from './protectedRoutes/DirectorRules';
 
 const TodoApp = () => {        
   return (
@@ -30,29 +33,65 @@ const TodoApp = () => {
         <Routes>
           <Route path='/' element={<Home/>} />
           // {/*Users*/}
-          <Route path='/Crear_Usuario' element={<UserPostForm />} />
-          <Route path='/Iniciar_Sesion' element={<Userlogin/>} />
-          <Route path='/Editar_Usuario/:id' element={<UserPostFormEdit />} />
+          <Route path='/Crear_Usuario' element={
+            <UnLoggedRoutes>
+              <UserPostForm />
+            </UnLoggedRoutes>
+          } />
+          <Route path='/Iniciar_Sesion' element={
+            <UnLoggedRoutes>
+              <Userlogin/>
+            </UnLoggedRoutes>
+          } />
+          <Route path='/Editar_Usuario/:id' element={
+            <LoggedRoutes>
+              <UserPostFormEdit />
+            </LoggedRoutes>
+          } />
           <Route path='/Lista_Usuarios' element={
             <AdminRoutes >
               <UserList />
             </AdminRoutes>
           } />
           // {/*Schools*/}
-          <Route path='/Crear_Escuela' element={<SchoolPostForm />} />
-          <Route path='/Editar_Escuela/:id' element={<SchoolEditForm />} />
+          <Route path='/Crear_Escuela' element={
+            <LoggedRoutes>
+              <SchoolPostForm />
+            </LoggedRoutes>
+          } />
+          <Route path='/Editar_Escuela/:id' element={
+            <DirectorRoutes>
+              <SchoolEditForm />
+            </DirectorRoutes>
+          } />
           <Route path='/Lista_Escuela' element={
             <AdminRoutes>
               <SchoolsList />
             </AdminRoutes>
           } />
           // {/*AnnouncementList*/}
-          <Route path='/Comunicados' element={<NotificadosList/>} />
-          <Route path='/Crear_Comunicados' element={<CrearNotificados/>} />
-          <Route path="/Editar_Comunicado/:id" element={<EditarNotificados />} />
+          <Route path='/Comunicados' element={
+            <LoggedRoutes >
+              <NotificadosList/>
+            </LoggedRoutes>
+          } />
+          <Route path='/Crear_Comunicados' element={
+            <LoggedRoutes >
+              <CrearNotificados/>
+            </LoggedRoutes>
+          } />
+          <Route path="/Editar_Comunicado/:id" element={
+            <LoggedRoutes >
+              <EditarNotificados />
+            </LoggedRoutes>
+          } />
 
           // {/*Payment*/}
-          <Route path='/Realizar_Pago' element={<RealizarPago/>} />
+          <Route path='/Realizar_Pago' element={
+            <LoggedRoutes >
+              <RealizarPago/>
+            </LoggedRoutes>
+          } />
 
           <Route path='*' element={<NotFound />}/>
         </Routes>

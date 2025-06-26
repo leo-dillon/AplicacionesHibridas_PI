@@ -37,7 +37,8 @@ export class UserController {
 		const token = jsonWebToken.sign(data, SECRET_KEY, { expiresIn: '1h' });
 		return res.json({
 			message: "Credenciales correctas",
-			jwt: token
+			jwt: token,
+			data: user
 		});
 	}
 
