@@ -1,8 +1,10 @@
 import { Navigate } from "react-router-dom"
+import { AuthContext } from "../../contexts/AuthContext"
+import { useContext } from "react"
 
 const DirectorRoutes = ({ children }) => {
-    const user = localStorage.getItem('jwt')
-    if( user?.role == "director" || user?.role == "Admin" ){
+    const { userData } = useContext(AuthContext)
+    if( !(userData?.role == "director" || userData?.role == "Admin") ){
         return <Navigate to="/" replace/>
     }
     return children

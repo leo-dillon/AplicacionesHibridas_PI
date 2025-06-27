@@ -102,7 +102,7 @@ const DatosSchool = ({ id, role }) => {
                             ( role == "director" )
                                 ? 
                                 <Link
-                                    to={``}
+                                    to={`Editar_Escuela/${id}`  }
                                     title="Editar usuario"
                                     className="absolute bottom-0 right-0 px-6 text-blue-400 text-lg border rounded-tl-xl rounded-br-xl hover:text-blue-600 transition"
                                 >

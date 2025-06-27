@@ -95,7 +95,6 @@ const SchoolEditForm = ()=>{
     }
  return(
     <div className="school-container bg-gray-100 py-4">
-      <h1>Formulario de editar Escuelas</h1>
   <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4">
     <h2 className="text-2xl font-bold text-center">Editar datos de: <strong>{schools.name}</strong> </h2>
 
@@ -108,7 +107,7 @@ const SchoolEditForm = ()=>{
         placeholder="ID de Usuario"
         value={schools.user_id}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       />
       {errors.user_id && <p className="text-red-500 text-sm mt-1">{errors.user_id}</p>}
@@ -122,7 +121,7 @@ const SchoolEditForm = ()=>{
         placeholder="Nombre de la escuela"
         value={schools.name}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       />
 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -136,7 +135,7 @@ const SchoolEditForm = ()=>{
         placeholder="CUE"
         value={schools.CUE}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       />
       {errors.CUE && <p className="text-red-500 text-sm mt-1">{errors.CUE}</p>}
@@ -150,7 +149,7 @@ const SchoolEditForm = ()=>{
         placeholder="Teléfonos (separados por coma)"
         value={schools.phones}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       />
       {errors.phones && <p className="text-red-500 text-sm mt-1">{errors.phones}</p>}
@@ -164,7 +163,7 @@ const SchoolEditForm = ()=>{
         placeholder="Dirección"
         value={schools.address}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       />
       {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
@@ -178,7 +177,7 @@ const SchoolEditForm = ()=>{
         placeholder="Ciudad"
         value={schools.city}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       />
       {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
@@ -192,7 +191,7 @@ const SchoolEditForm = ()=>{
         placeholder="Provincia"
         value={schools.province}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       />
       {errors.province && <p className="text-red-500 text-sm mt-1">{errors.province}</p>}
@@ -206,7 +205,7 @@ const SchoolEditForm = ()=>{
         placeholder="Emails (separados por coma)"
         value={schools.Emails}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
       />
       {errors.Emails && <p className="text-red-500 text-sm mt-1">{errors.Emails}</p>}
 
@@ -217,7 +216,7 @@ const SchoolEditForm = ()=>{
         name="level"
         value={schools.level}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       >
         <option value="">Nivel</option>
@@ -235,7 +234,7 @@ const SchoolEditForm = ()=>{
         name="type"
         value={schools.type}
         onChange={handleChange}
-        className="input"
+        className="`w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"
         
       >
         <option value="">Tipo de institución</option>

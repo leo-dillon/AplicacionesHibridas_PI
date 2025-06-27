@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
+import { Navigate } from "react-router-dom"
 
 const SmallDataPayment = ({ payment, key }) => {
     const DynamicUrl = import.meta.env.VITE_DynamicUrl
@@ -36,7 +37,11 @@ const SmallDataPayment = ({ payment, key }) => {
             }), 
         })
         .then( res => res.json() )
-        .then( data => console.log(data) )
+        .then( data => {
+            console.log(data)
+            alert("Pago Aprobado")
+            window.location.reload()
+        })
     }
     const handleSubmitDesaprobar = (e) => {
         e.preventDefault()
@@ -50,7 +55,11 @@ const SmallDataPayment = ({ payment, key }) => {
             }), 
         })
         .then( res => res.json() )
-        .then( data => console.log(data) )
+        .then( data => {
+            console.log(data)
+            alert("Pago no aprobado")
+            window.location.reload()
+        })
     }
     return (
         <>

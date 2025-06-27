@@ -1,7 +1,7 @@
-import  { useEffect, useState } from 'react';
-import { jwtDecode } from "jwt-decode";
+import  { useContext, useEffect, useState } from 'react';
 const DynamicUrl = import.meta.env.VITE_DynamicUrl
 import { Link } from "react-router-dom"
+import { AuthContext } from '../../contexts/AuthContext';
 
 // Componente para mostrar fecha de vencimiento con aviso 
 function DueDate({ dueDate }) {
@@ -64,26 +64,36 @@ function DueDate({ dueDate }) {
 
 export default function LastPayment() {
   const [dueDate, setDueDate] = useState(null);
+  const { userData } = useContext(AuthContext)
+
   useEffect(() => {
 
-    const token = localStorage.getItem('jwt');
-    let decoded = jwtDecode(token);
+    // const token = localStorage.getItem('jwt');
+    // let decoded = jwtDecode(token);
 
-    const schoolId = decoded['School'];
+    // const schoolId = decoded['School'];
    
-   
-    //  Hacer fetch al backend 
-    fetch(`${DynamicUrl}/payment/issuedToPaid/${schoolId}`)
-      .then(res => {
-        return res.json();
-        
-      })
+    if (!userData || !userData.id) return;
+    fetch( `${DynamicUrl}/payment/${userData.id}/User` )
+      .then(res => res.json())
       .then(response  => {
-           const payments = response.data; 
-  // Ordenar por fecha de vencimiento
-  const lastPayment = payments.sort((a, b) => new Date(b.issuedAt) - new Date(a.issuedAt))[0];
-  setDueDate(lastPayment.dueDate);
+        const payments = response.data; 
+        if(payments.length > 0){
+          const lastPayment = payments.sort((a, b) => new Date(b.issuedAt) - new Date(a.issuedAt))[0];
+          setDueDate(lastPayment.dueDate);
+        }
       })
+    //  Hacer fetch al backend 
+    // fetch(`${DynamicUrl}/payment/issuedToPaid/${schoolId}`)
+    //   .then(res => {
+    //     return res.json();
+        
+    //   })
+    //   .then(response  => {
+    //     const payments = response.data; 
+    //     const lastPayment = payments.sort((a, b) => new Date(b.issuedAt) - new Date(a.issuedAt))[0];
+    //     setDueDate(lastPayment.dueDate);
+    //   })
       .catch(err => {
         (err.message);
       })
@@ -91,9 +101,14 @@ export default function LastPayment() {
 
   return (
     <div>
-      <h3 className="text-lg font-bold mb-2">Último pago de la escuela:</h3>
-      
-      <DueDate dueDate={dueDate}/>
+      {
+        ( dueDate )
+        ? <>
+            <h3 className="text-lg font-bold mb-2">Último pago de la escuela:</h3>
+            <DueDate dueDate={dueDate}/>
+          </>
+          : ""
+      }
     </div>
   );
 }

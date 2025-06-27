@@ -53,6 +53,60 @@ static async getPaymentid(req, res) {
         });
     }
 }
+
+static async getPaymentUserId(req, res) {
+    try {
+        const { idUser } = req.params;
+        const payments = await PaymentModel.find({  
+            issuedTo: idUser,
+            paymentType: 'create_school',
+            status: 'paid' 
+        });
+
+        if (!payments || payments.length === 0) {
+            return res.status(404).json({
+                message: 'No se encontraron pagos para el usuario especificado.'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Pagos encontrados para el usuario.',
+            data: payments
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error al obtener los pagos por issuedTo',
+            error
+        });
+    }
+}
+
+static async getAllPaymentUserId(req, res) {
+    try {
+        const { idUser } = req.params;
+        const payments = await PaymentModel.findOne({  
+            issuedTo: idUser,
+            paymentType: 'create_school' 
+        });
+
+        if (!payments || payments.length === 0) {
+            return res.status(404).json({
+                message: 'No se encontraron pagos para el usuario especificado.'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Pagos encontrados para el usuario.',
+            data: payments
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error al obtener los pagos por issuedTo',
+            error
+        });
+    }
+}
+
 static async getPaymentidPaid(req, res) {
     try {
         const { idShool } = req.params;

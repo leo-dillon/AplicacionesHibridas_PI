@@ -7,16 +7,16 @@ const HomeUser = ({ id }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState()
 
-      useEffect( () => {
-            fetch( `${DynamicUrl}/users/${id}` )
-                .then(res => res.json())
-                .then(data => {
-                    setUser(data)
-                    setTimeout(() => {
-                        setLoading(false)
-                    }, 300);
-                })
-        },[])
+    useEffect( () => {
+        fetch( `${DynamicUrl}/users/${id}` )
+            .then(res => res.json())
+            .then(data => {
+                setUser(data)
+                setTimeout(() => {
+                    setLoading(false)
+                }, 300);
+            })
+    },[])
     return(
         <>
             {

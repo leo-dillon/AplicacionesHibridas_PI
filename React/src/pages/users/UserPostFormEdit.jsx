@@ -133,25 +133,25 @@ const handleChange = (e) => {
       name="file"
       accept="image/*"
       onChange={e => setUsers(prev => ({ ...prev, file: e.target.files[0] }))}
-      className="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+      className="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer"
     />
   </div>
 </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
         <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-        <input name="firstName" type="text" placeholder="Nombre" value={users.firstName} onChange={handleChange} className="input"  />
+        <input name="firstName" type="text" placeholder="Nombre" value={users.firstName} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"  />
         {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
 
-          <input name="lastName" type="text" placeholder="Apellido" value={users.lastName} onChange={handleChange} className="input"  />
+          <input name="lastName" type="text" placeholder="Apellido" value={users.lastName} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"  />
 {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
         </div>
         <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Genero</label>
-           <select name="gender" value={users.gender} onChange={handleChange} className="input" >
+           <select name="gender" value={users.gender} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2" >
           <option value="Male">Masculino</option>
           <option value="Female">Femenino</option>
           <option value="Other">Otro</option>
@@ -160,35 +160,35 @@ const handleChange = (e) => {
         </div>
         <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de nacimiento</label>
-         <input name="birthDate" type="date" value={users.birthDate} onChange={handleChange} className="input"  />
+         <input name="birthDate" type="date" value={users.birthDate} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"  />
          {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
         </div>
         
         <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">DNI</label>
-         <input name="dni" type="text" placeholder="DNI" value={users.dni} onChange={handleChange} className="input"  /> 
+         <input name="dni" type="text" placeholder="DNI" value={users.dni} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"  /> 
          {errors.dni && <p className="text-red-500 text-sm mt-1">{errors.dni}</p>}
         </div>
         <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-        <input name="email" type="email" placeholder="Email" value={users.email} onChange={handleChange} className="input"  />
+        <input name="email" type="email" placeholder="Email" value={users.email} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"  />
         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Direccion</label>
-          <input name="address" type="text" placeholder="Dirección" value={users.address} onChange={handleChange} className="input"  />
+          <input name="address" type="text" placeholder="Dirección" value={users.address} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"  />
           {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Telefono</label>
-          <input name="phone" type="tel" placeholder="Teléfono" value={users.phone} onChange={handleChange} className="input"  />
+          <input name="phone" type="tel" placeholder="Teléfono" value={users.phone} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2"  />
           {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
         </div>
        
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
-          <select name="role" value={users.role} onChange={handleChange} className="input" >
+          <select name="role" value={users.role} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:outline-none focus:ring-2" >
           <option value="student">Estudiante</option>
           <option value="parent">Padre</option>
           <option value="teacher">Profesor</option>
@@ -219,7 +219,7 @@ const handleChange = (e) => {
 </div>
          
      
-      <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+      <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition cursor-pointer">
         Enviar
       </button>
     </form>
