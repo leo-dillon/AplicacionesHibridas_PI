@@ -187,4 +187,25 @@ export class UserController {
 		res.status(500).json({ error: error.message })
 		}
 	}
+ // agrega cursoS al usuario:
+    static async assignCoursesToUser (req, res) {
+		const userId = req.params.id;
+		const { courseIds } = req.body; // se espera un array de IDs
+		try {
+			const user = await UserModel.findById(userId);
+			if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
+			
+			// Evita duplicados de cursos
+			// $addToSet agrega un valor solo si no existe ya en ese array
+			// $each te permite pasar múltiples valores a la vez.
+			await UserModel.findByIdAndUpdate(userId, {
+				$addToSet: { courses: { $each: courseIds } }
+			});
+			res.status(200).json({ message: 'Cursos asignados correctamente' });
+		} catch (error) {
+			console.error('Error asignando cursos:', error);
+			res.status(500).json({ message: 'Error interno del servidor' });
+		}
+	};
 }
+

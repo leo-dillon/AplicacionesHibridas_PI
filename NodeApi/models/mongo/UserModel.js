@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     createdAt:     { type: Date, default: Date.now },
     lastLogin:     { type: Date },
     active:        { type: Boolean, default: true },
-    role:          { type: String, enum: ['pending', 'student', 'parent', 'teacher', 'director'], default: 'pending' }
+    role:          { type: String, enum: ['pending', 'student', 'parent', 'teacher', 'director'], default: 'pending' },
+    courses:       [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }]
   }, {
     versionKey: false 
   })

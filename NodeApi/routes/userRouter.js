@@ -364,6 +364,6 @@ routerUser.put("/:id", upload.single('file'), UserController.editUserById)
  */
 routerUser.delete("/:id", UserController.deleteUserById)
 
-
+routerUser.post('/:id/assign-course', UserController.assignCoursesToUser);
 
 export default routerUser
