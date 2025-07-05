@@ -366,4 +366,6 @@ routerUser.delete("/:id", UserController.deleteUserById)
 
 routerUser.post('/:id/assign-course', UserController.assignCoursesToUser);
 
+routerUser.get("/:id/courses", UserController.getCoursesById)
+
 export default routerUser

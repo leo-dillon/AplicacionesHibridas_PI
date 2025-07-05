@@ -9,6 +9,11 @@ const NavBarAdmin = ({ handleLogout }) => {
         </Link>
       </li>
       <li className="flex items-center">
+        <Link to="/Curso" className="text-gray-300 text-xl hover:text-gray-100 transition duration-200 ">
+          Curso
+        </Link>
+      </li>
+      <li className="flex items-center">
         <Link to="/Comunicados" className="text-gray-300 text-xl hover:text-gray-100 transition duration-200 ">
           Notificaciones
         </Link>

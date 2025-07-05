@@ -22,6 +22,10 @@ import AdminRoutes from './protectedRoutes/AdminRutes';
 import UnLoggedRoutes from './protectedRoutes/UnloggedRutes';
 import LoggedRoutes from './protectedRoutes/LoggedRutes';
 import DirectorRoutes from './protectedRoutes/DirectorRules';
+//-------------
+import CursoList from '../pages/Course/MyCourses';      
+
+import ComunicadosCursoList from '../pages/announcementCourse/ComunicadosCursoList';      
 
 const TodoApp = () => {        
   return (
@@ -92,7 +96,16 @@ const TodoApp = () => {
               <RealizarPago/>
             </LoggedRoutes>
           } />
-
+           <Route path='/Comunicados-Curso/:id' element={
+            <LoggedRoutes >
+              <ComunicadosCursoList/>
+            </LoggedRoutes>
+          } />
+           <Route path='/Curso' element={
+            <LoggedRoutes >
+              <CursoList/>
+            </LoggedRoutes>
+          } />
           <Route path='*' element={<NotFound />}/>
         </Routes>
     

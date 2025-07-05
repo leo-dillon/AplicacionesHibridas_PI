@@ -1,5 +1,6 @@
 // controllers/UserController.js
 import { UserModel } from '../../models/mongo/UserModel.js'
+import { CoursesModel } from '../../models/mongo/CoursesModel.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jsonWebToken from 'jsonwebtoken';
@@ -33,8 +34,11 @@ export class UserController {
 		const data = {
 			id: 	user._id,
 			email: 	user.email,
+			nombre: user.firstName,
+			apellido: user.lastName,
 			role: 	user.role,
-			School:  user.school_id
+			School:  user.school_id,
+			courses:  user.courses
 		};
 		const token = jsonWebToken.sign(data, SECRET_KEY, { expiresIn: '1h' });
 		return res.json({
@@ -207,5 +211,24 @@ export class UserController {
 			res.status(500).json({ message: 'Error interno del servidor' });
 		}
 	};
+
+	static async getCoursesById(req, res) {
+  try {
+    const userId = req.params.id;
+    const user = await UserModel.findById(userId);
+
+    // Si no tiene cursos
+    if (!user.courses || user.courses.length === 0) {
+      return res.status(200).json({ message: 'El usuario no tiene cursos asignados.', data: [] });
+    }
+
+    const courses = await CoursesModel.find({ _id: { $in: user.courses } });
+    res.status(200).json({ data: courses });
+
+  } catch (error) {
+    console.error('Error al obtener cursos por ID de usuario:', error);
+    res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+}
 }
 
