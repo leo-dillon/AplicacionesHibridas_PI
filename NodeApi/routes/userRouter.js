@@ -368,4 +368,6 @@ routerUser.post('/:id/assign-course', UserController.assignCoursesToUser);
 
 routerUser.get("/:id/courses", UserController.getCoursesById)
 
+routerUser.get("/shool/:id", UserController.getUserBySchool)
+
 export default routerUser

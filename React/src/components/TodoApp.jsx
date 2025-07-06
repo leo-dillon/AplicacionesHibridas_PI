@@ -29,6 +29,9 @@ import EditCurso from '../pages/Course/EditCurso';
 import NewMesage from '../pages/announcementCourse/crearMensaje';      
 import ComunicadosCursoList from '../pages/announcementCourse/ComunicadosCursoList';      
 import EditMesage from '../pages/announcementCourse/editarNotificados';   
+import StudentsAdmin from '../pages/users/StudentsAdmin';   
+import AddCourseUser from '../pages/users/AddCourseUser';   
+
 
 const TodoApp = () => {        
   return (
@@ -127,6 +130,16 @@ const TodoApp = () => {
           <Route path="/Editar_Mensaje/:id" element={
             <LoggedRoutes >
               <EditMesage />
+            </LoggedRoutes>
+          } />
+            <Route path="/Estudiantes" element={
+            <LoggedRoutes >
+              <StudentsAdmin/>
+            </LoggedRoutes>
+          } />
+          <Route path="/Agregar_Curso_Usuario/:id" element={
+            <LoggedRoutes >
+              <AddCourseUser/>
             </LoggedRoutes>
           } />
           

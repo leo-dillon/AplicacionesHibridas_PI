@@ -29,9 +29,7 @@ const MyCourses = () => {
         .then(data => {
           if (data.data && data.data.length > 0) {
             setCourses(data.data);
-          } else {
-            setError('No tenés cursos asignados.');
-          }
+          } 
         })
         .catch(err => {
           console.error('Error al obtener cursos:', err);
@@ -77,7 +75,7 @@ const handleEliminar = (id) => {
 
       {error ? (
         <p className="text-red-600">{error}</p>
-      ) : (
+      ) : courses.length > 0 ? (
         <div className="space-y-6">
           {courses.map((course, index) => (
             <div
@@ -119,7 +117,29 @@ const handleEliminar = (id) => {
             </div>
           ))}
         </div>
-      )}
+      ): (
+      <div className="flex flex-col items-center justify-center bg-gray-50 border border-dashed border-gray-300 rounded-lg p-10  shadow-sm">
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12 text-gray-400 mb-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          >
+            <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+            d="M9.75 9.75h.008v.008H9.75V9.75zM14.25 9.75h.008v.008h-.008V9.75zM9 13.5h6m3.75-1.5a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+         </svg>
+         <h3 className="text-lg font-semibold text-gray-700 mb-1">Sin cursos asignados</h3>
+         <p className="text-sm text-gray-500 text-center max-w-sm">
+          Aún no te han asignado ningún curso. Cuando te asignen alguno, aparecerá aquí. 
+
+          </p>
+      </div>
+       )}
     </div>
 
   );

@@ -194,17 +194,14 @@ export class UserController {
  // agrega cursoS al usuario:
     static async assignCoursesToUser (req, res) {
 		const userId = req.params.id;
-		const { courseIds } = req.body; // se espera un array de IDs
+		const { courseIds } = req.body; 
 		try {
 			const user = await UserModel.findById(userId);
 			if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
 			
-			// Evita duplicados de cursos
-			// $addToSet agrega un valor solo si no existe ya en ese array
-			// $each te permite pasar múltiples valores a la vez.
-			await UserModel.findByIdAndUpdate(userId, {
-				$addToSet: { courses: { $each: courseIds } }
-			});
+			
+			user.courses = courseIds;
+           await user.save();
 			res.status(200).json({ message: 'Cursos asignados correctamente' });
 		} catch (error) {
 			console.error('Error asignando cursos:', error);
@@ -226,9 +223,19 @@ export class UserController {
     res.status(200).json({ data: courses });
 
   } catch (error) {
-    console.error('Error al obtener cursos por ID de usuario:', error);
     res.status(500).json({ message: 'Error interno del servidor.' });
   }
 }
+static async getUserBySchool(req, res) {
+  try {
+    const schoolId = req.params.id;
+    const users = await UserModel.find({ school_id: schoolId });
+    res.status(200).json({ data: users });
+  } catch (error) {
+    res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+}
+
+
 }
 
