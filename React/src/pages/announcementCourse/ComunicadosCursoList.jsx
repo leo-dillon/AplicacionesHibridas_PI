@@ -38,10 +38,10 @@ const AnnouncementList = () => {
   }, []);
 
   const handleDelete = async (id) => {
-  if (!confirm("¿Estás seguro de que querés eliminar este comunicado?")) return;
+  if (!confirm("¿Estás seguro de que querés eliminar este Mensaje?")) return;
   try {
     const token = localStorage.getItem('jwt');
-    fetch(`${DynamicUrl}/announcement/${id}`, {
+    fetch(`${DynamicUrl}/AnnouncementCourse/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -60,7 +60,7 @@ const AnnouncementList = () => {
   <h1 className="text-2xl font-bold">Mensajes del curso:</h1>
   {isDirector && (
     <Link
-      to={`/Crear_Comunicados`}
+      to={`/Nuevo_Mensaje/${id}`}
       className="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
     >
       Agregar Comunicado
@@ -68,15 +68,18 @@ const AnnouncementList = () => {
   )}
 </div>
 
-       <section className="space-y-4">
+       <section className="space-y-4 mb-6">
         {errorMsg ? (
-          <p className="text-red-600 text-center">{errorMsg}</p>
+          <p className="text-red-600 text-center ">{errorMsg}</p>
         ) : announcements.length > 0 ? (
           announcements.map((notification) => (
             <div>
               <div key={notification._id} className="shadow-md bg-white rounded-xl border border-gray-200 px-5  py-2 transition hover:shadow-lg">
+                <p className="text-base font-semibold text-blue-700 mb-2">{notification.userName}</p>
               <div className="HTMLForzado max-w-none text-gray-800 mb-2"
-                  dangerouslySetInnerHTML={{ __html: notification.message }}></div>
+                  dangerouslySetInnerHTML={{ __html: notification.message }}>
+
+                  </div>
               <p className="text-sm text-gray-500">
                 Publicado el: {new Date(notification.create_at).toLocaleString()}
               </p>
@@ -84,7 +87,7 @@ const AnnouncementList = () => {
               <div>
                 <hr className=" border-gray-300" />
                 <div className="flex justify-end gap-3">
-                  <Link to={`/Editar_Comunicado/${notification._id}`} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                  <Link to={`/Editar_Mensaje/${notification._id}`} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
                   Editar
                   </Link>
                   <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"  onClick={() => handleDelete(notification._id)}>Eliminar</button>
