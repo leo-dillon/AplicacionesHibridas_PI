@@ -4,9 +4,20 @@ export class coursesController {
 
     static async getAllCourses (req,res) {
             let CoursesData = await CoursesModel.find()
-            res.json(CoursesData)
+            res.json({data: CoursesData})
         }
 
+   static async getAllCoursesSchool(req, res) {
+  try {
+    const { id } = req.params; // ID de la escuela
+    const cursos = await CoursesModel.find({ schoolId: id });
+
+    res.json({ data: cursos });
+  } catch (error) {
+    console.error('Error al obtener cursos por escuela:', error);
+    res.status(500).json({ message: 'Error del servidor.' });
+  }
+}
    static async createCourse(req, res) {
         try {
             const Courser = req.body

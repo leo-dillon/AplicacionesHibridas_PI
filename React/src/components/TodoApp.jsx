@@ -24,6 +24,8 @@ import LoggedRoutes from './protectedRoutes/LoggedRutes';
 import DirectorRoutes from './protectedRoutes/DirectorRules';
 //-------------
 import CursoList from '../pages/Course/MyCourses';      
+import NewCurso from '../pages/Course/NewCurso';      
+import EditCurso from '../pages/Course/EditCurso';
 import NewMesage from '../pages/announcementCourse/crearMensaje';      
 import ComunicadosCursoList from '../pages/announcementCourse/ComunicadosCursoList';      
 import EditMesage from '../pages/announcementCourse/editarNotificados';   
@@ -107,7 +109,16 @@ const TodoApp = () => {
               <CursoList/>
             </LoggedRoutes>
           } /> 
-        
+          <Route path="/NuevoCurso" element={
+            <LoggedRoutes >
+              <NewCurso/>
+            </LoggedRoutes>
+          } />
+          <Route path="/EditCurso/:course_id" element={
+            <LoggedRoutes >
+              <EditCurso/>
+            </LoggedRoutes>
+          } />
           <Route path='/Nuevo_Mensaje/:course_id' element={
             <LoggedRoutes >
               <NewMesage/>
@@ -118,6 +129,7 @@ const TodoApp = () => {
               <EditMesage />
             </LoggedRoutes>
           } />
+          
           <Route path='*' element={<NotFound />}/>
         </Routes>
     
