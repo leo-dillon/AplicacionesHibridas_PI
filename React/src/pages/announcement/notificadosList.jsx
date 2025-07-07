@@ -16,7 +16,7 @@ const AnnouncementList = () => {
      const token = localStorage.getItem('jwt');
      const decoded = jwtDecode(token);
      const role = decoded['role']
-      if (role === 'director' || role === 'teacher') {
+      if (role === 'director') {
       setIsDirector(true);
     }
     
@@ -56,19 +56,18 @@ const AnnouncementList = () => {
   return (
     <div>
       <div className="flex justify-between items-center my-4 mx-4">
-  <h1 className="text-2xl font-bold">Lista de Comunicados</h1>
-  {isDirector && (
-    <Link
-      to={`/Crear_Comunicados`}
-      className="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
-    >
-      Agregar Comunicado
-    </Link>
-  )}
-</div>
-
-       <section className="space-y-4">
-        {errorMsg ? (
+        <h1 className="text-2xl font-bold">Lista de Comunicados</h1>
+        {isDirector && (
+          <Link
+          to={`/Crear_Comunicados`}
+          className="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
+            Agregar Comunicado
+            </Link>
+          )}
+          </div>
+          <hr/>
+          <section className="space-y-4 my-6">
+            {errorMsg ? (
           <p className="text-red-600 text-center">{errorMsg}</p>
         ) : announcements.length > 0 ? (
           announcements.map((notification) => (

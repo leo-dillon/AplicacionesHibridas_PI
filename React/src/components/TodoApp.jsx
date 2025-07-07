@@ -22,6 +22,7 @@ import AdminRoutes from './protectedRoutes/AdminRutes';
 import UnLoggedRoutes from './protectedRoutes/UnloggedRutes';
 import LoggedRoutes from './protectedRoutes/LoggedRutes';
 import DirectorRoutes from './protectedRoutes/DirectorRules';
+import TeacherRules from './protectedRoutes/TeacherRules';
 //-------------
 import CursoList from '../pages/Course/MyCourses';      
 import NewCurso from '../pages/Course/NewCurso';      
@@ -86,21 +87,21 @@ const TodoApp = () => {
             </LoggedRoutes>
           } />
           <Route path='/Crear_Comunicados' element={
-            <LoggedRoutes >
+            <DirectorRoutes >
               <CrearNotificados/>
-            </LoggedRoutes>
+            </DirectorRoutes>
           } />
           <Route path="/Editar_Comunicado/:id" element={
-            <LoggedRoutes >
+            <DirectorRoutes >
               <EditarNotificados />
-            </LoggedRoutes>
+            </DirectorRoutes>
           } />
 
           // {/*Payment*/}
           <Route path='/Realizar_Pago' element={
-            <LoggedRoutes >
+            <DirectorRoutes >
               <RealizarPago/>
-            </LoggedRoutes>
+            </DirectorRoutes>
           } />
            <Route path='/Comunicados-Curso/:id' element={
             <LoggedRoutes >
@@ -113,34 +114,34 @@ const TodoApp = () => {
             </LoggedRoutes>
           } /> 
           <Route path="/NuevoCurso" element={
-            <LoggedRoutes >
+            <DirectorRoutes >
               <NewCurso/>
-            </LoggedRoutes>
+            </DirectorRoutes>
           } />
           <Route path="/EditCurso/:course_id" element={
-            <LoggedRoutes >
+            <DirectorRoutes >
               <EditCurso/>
-            </LoggedRoutes>
+            </DirectorRoutes>
           } />
           <Route path='/Nuevo_Mensaje/:course_id' element={
-            <LoggedRoutes >
+            <TeacherRules >
               <NewMesage/>
-            </LoggedRoutes>
+            </TeacherRules>
           } />
           <Route path="/Editar_Mensaje/:id" element={
-            <LoggedRoutes >
+            <TeacherRules >
               <EditMesage />
-            </LoggedRoutes>
+            </TeacherRules>
           } />
             <Route path="/Estudiantes" element={
-            <LoggedRoutes >
+            <DirectorRoutes >
               <StudentsAdmin/>
-            </LoggedRoutes>
+            </DirectorRoutes>
           } />
           <Route path="/Agregar_Curso_Usuario/:id" element={
-            <LoggedRoutes >
+            <DirectorRoutes >
               <AddCourseUser/>
-            </LoggedRoutes>
+            </DirectorRoutes>
           } />
           
           <Route path='*' element={<NotFound />}/>

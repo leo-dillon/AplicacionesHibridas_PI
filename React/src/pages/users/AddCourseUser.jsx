@@ -57,43 +57,46 @@ const AssignCoursesToUser = () => {
   };
 
   return (
-    <div className="p-6 max-w-xl mx-auto bg-white rounded-xl shadow space-y-4">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Asignar Cursos al Usuario</h1>
+    <div className="p-8 my-8 max-w-2xl mx-auto bg-white border border-gray-200 rounded-3xl shadow-lg space-y-6">
+  <h1 className="text-3xl font-bold text-blue-700">Asignar Cursos al Usuario</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-  <label className="block text-sm font-medium text-gray-700 mb-2">
-    Selecciona Su cursos:
-  </label>
-  <div className="max-h-40 overflow-y-auto border border-gray-300 rounded-md p-2 bg-white">
-    {courses.map(course => (
-      <label key={course._id} className="flex items-center space-x-2 mb-2 cursor-pointer">
-        <input type="checkbox" 
-        value={course._id}
-          checked={selectedCourses.includes(course._id)}
-          onChange={(e) => {
-            const checked = e.target.checked;
-            setSelectedCourses(prev => {
-              if (checked) {
-                return [...prev, course._id];
-              } else {
-                return prev.filter(id => id !== course._id);
-              }
-            });
-          }}
-          className="form-checkbox h-5 w-5 text-blue-600"
-        />
-        <span className="text-gray-800">{course.titulo}</span>
+  <form onSubmit={handleSubmit} className="space-y-5">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Cursos disponibles:
       </label>
-    ))}
-  </div>
-
-  <button
-    type="submit"
-    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-md transition">
-    Asignar Cursos
-  </button>
-</form>
+      <div className="max-h-48 overflow-y-auto rounded-xl border border-gray-300 bg-gray-50 p-3 space-y-2 custom-scroll">
+        {courses.map((course) => (
+          <label
+            key={course._id}
+            className="flex items-center gap-3 p-2 bg-white hover:bg-blue-50 rounded-lg transition cursor-pointer shadow-sm"
+          >
+            <input
+              type="checkbox"
+              value={course._id}
+              checked={selectedCourses.includes(course._id)}
+              onChange={(e) => {
+                const checked = e.target.checked;
+                setSelectedCourses((prev) =>
+                  checked ? [...prev, course._id] : prev.filter((id) => id !== course._id)
+                );
+              }}
+              className="h-5 w-5 text-blue-600 accent-blue-600"
+            />
+            <span className="text-gray-800 font-medium">{course.titulo}</span>
+          </label>
+        ))}
+      </div>
     </div>
+    <button
+      type="submit"
+      className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl shadow-md transition duration-300"
+    >
+      Asignar Cursos
+    </button>
+  </form>
+</div>
+
   );
 };
 
