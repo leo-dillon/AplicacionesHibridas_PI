@@ -2,7 +2,7 @@ import  routerUser  from './userRouter.js';
 import  routerSchool  from './schoolsRouter.js';
 import routerPayment from './paymentRouter.js';
 import routerAnnouncement from './announcementRouter.js';
-import routerAnnouncementCourse from './AnnouncementCourse.js';
+import routerAnnouncementCourse from './announcementCourse.js';
 import routerCourses from './CoursesRouter.js';
 
  function routerApi(app){
