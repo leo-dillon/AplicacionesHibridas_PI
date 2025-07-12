@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { AuthContext } from "../contexts/AuthContext"
-import HomeUnlogged from "../components/home/homeUnlogged"
+import HomeUnlogged from "../components/home/HomeUnlogged"
 import HomeLogged from "../components/home/HomeLogged"
 
 function  Home() {
