@@ -69,7 +69,7 @@ const Userlogin = () => {
   <div className="w-full max-w-md bg-white rounded-2xl shadow-lg px-3 py-8 space-y-6">
     <div className="flex justify-center">
       <img
-        src="/public/logo.png"
+        src="Logo.png"
         alt="Logo Login"
         className="w-32 h-32 rounded-3xl shadow-md border border-gray-200"
       />

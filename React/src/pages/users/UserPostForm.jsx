@@ -77,7 +77,7 @@ const handleChange = (e) => {
   <div className="flex flex-col items-center w-full max-w-4xl bg-white p-8 my-12 rounded-2xl shadow-lg space-y-6">
     <div className="flex flex-col justify-center items-center">
       <img
-        src="/public/logo.png"
+        src="Logo.png"
         alt="Logo Login"
         className="w-32 h-32 rounded-3xl shadow-md border border-gray-200"
       />

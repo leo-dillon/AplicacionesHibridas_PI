@@ -1,12 +1,16 @@
+import fondo from '/public/fondoHome.jpg';
 function HomeUnlogged(){
     return (
         <>
             <section className="mb-24">
-                <div className="flex justify-center items-center min-h-120 bg-[url(./public/fondoHome.jpg)] bg-center rounded-b-4xl">
-                    <h2 className="w-full bg-blue-200/90 p-12 text-4xl text-center text-gray-800 font-bold">
-                        Sistema de Gestión y de comunicación academíca.
-                    </h2>
-                </div>
+                <div
+  className="flex justify-center items-center min-h-120 bg-center rounded-b-4xl"
+  style={{ backgroundImage: `url(${fondo})` }}
+>
+  <h2 className="w-full bg-blue-200/90 p-12 text-4xl text-center text-gray-800 font-bold">
+    Sistema de Gestión y de comunicación académica.
+  </h2>
+</div>
             </section>
             <section className="flex flex-col gap-12">
                 <h3 className="w-full text-gray-600 font-semibold text-4xl text-center border-b ">
