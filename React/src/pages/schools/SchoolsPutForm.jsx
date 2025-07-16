@@ -46,10 +46,14 @@ const SchoolEditForm = ()=>{
   if (!schools.address.trim()) newErrors.address = 'La dirección es obligatoria.';
   if (!schools.city.trim()) newErrors.city = 'La ciudad es obligatoria.';
   if (!schools.province.trim()) newErrors.province = 'La provincia es obligatoria.';
-  if (!schools.phones.trim()) newErrors.phones = 'El teléfono es obligatorio.';
-  if (schools.Emails && !schools.Emails.split(',').every(email => /\S+@\S+\.\S+/.test(email.trim()))) {
-    newErrors.Emails = 'Uno o más correos electrónicos no son válidos.';
-  }
+  if (!String(schools.phones).trim()) {
+  newErrors.phones = 'El teléfono es obligatorio.';
+}
+
+if (schools.Emails && !String(schools.Emails).split(',').every(email => /\S+@\S+\.\S+/.test(email.trim()))) {
+  newErrors.Emails = 'El correos electrónicos no es válido.';
+}
+
   if (!schools.level) newErrors.level = 'Seleccioná un nivel educativo.';
   if (!schools.type) newErrors.type = 'Seleccioná un tipo de gestión.';
 
@@ -145,7 +149,7 @@ const SchoolEditForm = ()=>{
           <label className="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
           <input
         name="phones"
-        type="text"
+        type="tel"
         placeholder="Teléfonos (separados por coma)"
         value={schools.phones}
         onChange={handleChange}

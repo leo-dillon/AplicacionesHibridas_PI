@@ -64,7 +64,7 @@ const SchoolPostForm = ()=>{
       .then(res => res.json())
       .then(data => {
         if(data.message == "No se encontraron pagos para el usuario especificado."){
-          alert('Deber Realizar un pago para crear una escuela')
+          //alert('Deber Realizar un pago para crear una escuela')
           navigate("/Realizar_Pago")
         }else{
           setPayLoading(true)
