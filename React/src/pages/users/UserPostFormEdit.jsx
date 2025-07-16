@@ -79,7 +79,7 @@ if (!users.dni) newErrors.dni = 'El DNI es obligatorio';
   if (!validate()) return;
 
   const cleanedUsers = { ...users };
-  delete cleanedUsers.courses; // Elimina el campo no editable
+  delete cleanedUsers.courses; // Elimina el campo 
 
   const formData = new FormData();
   // Agregamos todos los campos menos file

@@ -32,9 +32,10 @@ const UsersBySchool = () => {
   }, []);
 
   //  Aplicamos el filtro por rol
-  const filteredUsers = selectedRole
-    ? users.filter((user) => user.role === selectedRole)
-    : users;
+  const filteredUsers = users
+  .filter((user) => user.role !== 'director') // excluye directores
+  .filter((user) => !selectedRole || user.role === selectedRole); 
+
 
   return (
     <div className="p-6">
