@@ -75,29 +75,33 @@ if (!users.dni) newErrors.dni = 'El DNI es obligatorio';
     return Object.keys(newErrors).length === 0;
   };
    const handleSubmit = (e) => {
-    e.preventDefault();
-        if (!validate()) return;
-    const formData = new FormData();
-    // Agregamos todos los campos menos file
-    Object.entries(users).forEach(([key, value]) => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  const cleanedUsers = { ...users };
+  delete cleanedUsers.courses; // Elimina el campo no editable
+
+  const formData = new FormData();
+  // Agregamos todos los campos menos file
+  Object.entries(cleanedUsers).forEach(([key, value]) => {
     if (key !== 'file' && value !== undefined) {
       formData.append(key, value);
     }
   });
-   if (users.file) {
+  if (users.file) {
     formData.append('file', users.file);
   }
-    fetch(`${DynamicUrl}/users/${id}`, {
-      method: 'PUT',
-      body: formData,
-    })
+  fetch(`${DynamicUrl}/users/${id}`, {
+    method: 'PUT',
+    body: formData,
+  })
     .then(() => {
-      navigate('/Lista_Usuarios'); 
+      navigate('/Lista_Usuarios');
     })
     .catch((error) => {
       console.error('Error al enviar los datos:', error);
     });
-  }
+};
 const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setUsers((prevData) => ({
@@ -105,13 +109,8 @@ const handleChange = (e) => {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-  
-
-
   return (
     <div className="user-container bg-gray-100 py-4">
-            
-
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4" >
       <h2 className="text-2xl font-bold text-center"> Editar Usuario</h2>
   <div className="flex flex-col items-center gap-4 mb-6">

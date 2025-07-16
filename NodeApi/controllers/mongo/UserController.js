@@ -166,6 +166,8 @@ export class UserController {
 			email: userUpdated.email,
 			role: userUpdated.role,
 			School: userUpdated.school_id,
+			courses: userUpdated.courses,
+
 		};
 		const token = jsonWebToken.sign(data , SECRET_KEY, { expiresIn: '1h' });
 			res.status(200).json({
